@@ -4,25 +4,18 @@ package loading.scene
 	import flash.display.BitmapData;
 	import flash.display.Shape;
 	
-	import game.map.models.MapModel;
-	
-	import loading.model.AssetsModel;
-	
 	import mvc.view.Scene;
 	
 	import starling.core.Starling;
 	import starling.display.BlendMode;
 	import starling.display.Image;
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.text.TextField;
-	import starling.text.TextFieldAutoSize;
 	import starling.textures.Texture;
-	import starling.utils.Color;
 	
 	public class LoadingScene extends Scene
 	{
-		[Embed(source="logo.png")]
+		[Embed(source="/logo.png")]
 		public const LogoTexture:Class;
 		
 		public static const PROGRESS_BAR_NAME:String = "progressBar";
