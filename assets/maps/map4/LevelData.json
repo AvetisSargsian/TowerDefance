@@ -1,0 +1,23 @@
+{
+	"MapName":"map1.png",
+	
+	"WayPoints":[{ "x":30,"y":350,"direction":7 },
+				 { "x":640,"y":350,"direction":7 },
+				 { "x":1250,"y":350,"direction":7 }],
+				 
+	"TowersTypes":[1,2],
+	
+	"Waves":[{ "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },
+			 { "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },
+			 { "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },
+			 { "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },
+			 { "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },
+			 { "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },
+			 { "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },
+			 { "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },
+			 { "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },
+			 { "scheme":"line", "total_count":10, "enemys_types":{"type1":10} }],
+			 
+	"PlayerLifeCount":10,
+	"GameSpeed":1
+}

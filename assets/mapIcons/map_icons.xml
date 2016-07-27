@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="map_icons.png">
+	<SubTexture name="map1_icon"	x="0"	y="356"	width="212"	height="119" frameX="-0" frameY="-0" frameWidth="212" frameHeight="119"/>
+	<SubTexture name="map2_icon"	x="213"	y="356"	width="211"	height="119" frameX="-0" frameY="-0" frameWidth="211" frameHeight="119"/>
+	<SubTexture name="map3_icon"	x="0"	y="0"	width="256"	height="168" frameX="-0" frameY="-0" frameWidth="256" frameHeight="168"/>
+	<SubTexture name="map4_icon"	x="0"	y="169"	width="255"	height="186" frameX="-0" frameY="-0" frameWidth="255" frameHeight="186"/>
+</TextureAtlas>

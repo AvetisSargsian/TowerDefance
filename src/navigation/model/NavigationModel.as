@@ -1,0 +1,72 @@
+package navigation.model
+{
+	import mvc.mediator.IMediator;
+	import mvc.view.AbstractView;
+	
+	import starling.display.DisplayObject;
+	import starling.events.EventDispatcher;
+	
+	public class NavigationModel extends EventDispatcher
+	{
+		public static const NAVIGATION_EVENT:String = "navigationEvent";
+		
+		private var _curentMediator:IMediator;
+		private var _nextMediator:IMediator;
+		private var _canvas:AbstractView;
+		private static var _instance:NavigationModel;
+		
+		public static function get instance( ):NavigationModel
+		{
+			if (_instance == null)
+			{
+				_instance = new NavigationModel (new PrivateClass());		
+			}
+			return _instance;
+		}
+				
+		public function NavigationModel(pvt:PrivateClass)
+		{
+			super();
+		}
+		
+		public function init(displayObject:AbstractView):void
+		{
+			if (_canvas == null)
+				_canvas = displayObject;
+		}
+		
+		public function get nextScene():IMediator
+		{
+			return _nextMediator;
+		}
+		
+		public function set nextScene(value:IMediator):void
+		{
+			_nextMediator = value;
+		}
+
+		public function get curentScene():IMediator
+		{
+			return _curentMediator;
+		}
+
+		public function set curentScene(value:IMediator):void
+		{
+			if (_curentMediator)
+			{
+				_curentMediator.dispose();
+				_canvas.removeChild(_curentMediator.nativeVIew,true);
+			}
+			
+			_curentMediator = value;
+			_curentMediator.contextView = _canvas; 
+		}
+	}
+}
+class PrivateClass
+{
+	public function PrivateClass( ) 
+	{
+		
+	}
+}
