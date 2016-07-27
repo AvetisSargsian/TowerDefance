@@ -5,9 +5,6 @@ package navigation
 	import navigation.controller.NavigationController;
 	import navigation.model.NavigationModel;
 	
-	import starling.display.Sprite;
-	import starling.events.Event;
-	
 	public class StarlingRootDisplayObject extends AbstractView
 	{
 		public function StarlingRootDisplayObject()
