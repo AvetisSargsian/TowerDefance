@@ -4,7 +4,7 @@ package loading.scene.mediator
 	import loading.scene.LoadingScene;
 	
 	import mvc.view.AbstractView;
-	import mvc.view.mediator.SceneMediator;
+	import mvc.mediator.SceneMediator;
 	
 	import starling.display.DisplayObject;
 	import starling.events.Event;

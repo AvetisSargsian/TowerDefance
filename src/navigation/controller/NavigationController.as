@@ -11,7 +11,7 @@ package navigation.controller
 	
 	import menu.mediator.MainMenuSceneMediator;
 	
-	import mvc.view.mediator.SceneMediator;
+	import mvc.mediator.SceneMediator;
 	
 	import navigation.model.NavigationModel;
 	

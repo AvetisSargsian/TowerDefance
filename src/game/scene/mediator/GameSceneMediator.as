@@ -8,9 +8,9 @@ package game.scene.mediator
 	import game.scene.GameScene;
 	import game.towers.views.mediator.TowerLayerMediator;
 	
-	import mvc.mediator.IMediator;
+	import mvc.mediator.AbstractMediator;
+	import mvc.mediator.SceneMediator;
 	import mvc.view.AbstractView;
-	import mvc.view.mediator.SceneMediator;
 	
 	import navigation.controller.NavigationController;
 	
@@ -21,9 +21,9 @@ package game.scene.mediator
 		private var gameModel:GameModel;
 		private var mapModel:MapModel;
 		
-		private var enemyLayerMediator:IMediator;
-		private var towerLayerMediator:IMediator;
-		private var ammosLayerMediator:IMediator;
+		private var enemyLayerMediator:AbstractMediator;
+		private var towerLayerMediator:AbstractMediator;
+		private var ammosLayerMediator:AbstractMediator;
 		
 		public function GameSceneMediator()
 		{

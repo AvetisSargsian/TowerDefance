@@ -11,14 +11,12 @@ package navigation
 		{
 			super();
 			this.onAddedToStage = onAdded;
-
 			NavigationModel.instance.init(this);
 		}
 		
 		private function onAdded():void
 		{
-			this.onAddedToStage = null;
-			
+			this.onAddedToStage = null;			
 			NavigationController.instance.changeScene(Constants.MAIN_MENU_SCENE);
 		}
 	}

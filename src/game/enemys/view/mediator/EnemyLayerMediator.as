@@ -1,7 +1,7 @@
 package game.enemys.view.mediator
 {
 	import game.enemys.controllers.EnemyController;
-	import game.enemys.factory.UnitFactory;
+	import game.enemys.factory.EnemysWaveFactory;
 	import game.enemys.models.EnemysModel;
 	import game.enemys.view.EnemyLayer;
 	
@@ -23,7 +23,7 @@ package game.enemys.view.mediator
 			nativeVIew.addEventListener(Event.ADDED_TO_STAGE,onAddedTostege);
 			nativeVIew.addEventListener(Event.TRIGGERED,startNewWave);
 			
-			_factory = new UnitFactory();
+			_factory = new EnemysWaveFactory();
 			_unitsCont = EnemyController.instance;
 			_enemyM = EnemysModel.instance;
 			_enemyM.addEventListener(EnemysModel.NO_ENEMY_LEFT,onWavesEnd);
@@ -66,7 +66,7 @@ package game.enemys.view.mediator
 		
 		private function onNewWaveAdded(event:Event):void
 		{
-			_factory.produce(nativeVIew);
+			_factory.produce(nativeVIew, _enemyM.newWave);
 		}
 		
 		private function onWavesEnd(event:Event):void

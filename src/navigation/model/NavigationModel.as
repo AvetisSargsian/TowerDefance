@@ -1,17 +1,16 @@
 package navigation.model
 {
-	import mvc.mediator.IMediator;
+	import mvc.mediator.AbstractMediator;
 	import mvc.view.AbstractView;
 	
-	import starling.display.DisplayObject;
 	import starling.events.EventDispatcher;
 	
 	public class NavigationModel extends EventDispatcher
 	{
 		public static const NAVIGATION_EVENT:String = "navigationEvent";
 		
-		private var _curentMediator:IMediator;
-		private var _nextMediator:IMediator;
+		private var _curentMediator:AbstractMediator;
+		private var _nextMediator:AbstractMediator;
 		private var _canvas:AbstractView;
 		private static var _instance:NavigationModel;
 		
@@ -35,22 +34,22 @@ package navigation.model
 				_canvas = displayObject;
 		}
 		
-		public function get nextScene():IMediator
+		public function get nextScene():AbstractMediator
 		{
 			return _nextMediator;
 		}
 		
-		public function set nextScene(value:IMediator):void
+		public function set nextScene(value:AbstractMediator):void
 		{
 			_nextMediator = value;
 		}
 
-		public function get curentScene():IMediator
+		public function get curentScene():AbstractMediator
 		{
 			return _curentMediator;
 		}
 
-		public function set curentScene(value:IMediator):void
+		public function set curentScene(value:AbstractMediator):void
 		{
 			if (_curentMediator)
 			{
