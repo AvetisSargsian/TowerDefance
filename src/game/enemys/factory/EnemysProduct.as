@@ -4,10 +4,9 @@ package game.enemys.factory
 	import game.enemys.view.UnitBaseView;
 	import game.map.objects.Wave;
 	
-	import mvc.disposeble.IDisposeble;
 	import mvc.factory.IContentProduct;
 	
-	public class EnemysProduct implements IContentProduct, IDisposeble
+	public class EnemysProduct implements IContentProduct
 	{
 		private var _wave:Wave;
 		private var _content:Array;

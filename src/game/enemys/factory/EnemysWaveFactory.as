@@ -1,5 +1,7 @@
 package game.enemys.factory
 {
+	import flash.utils.getTimer;
+	
 	import mvc.command.interfaces.ICommand;
 	import mvc.command.interfaces.ICommandExecutor;
 	import mvc.factory.IContentProduct;
@@ -15,10 +17,17 @@ package game.enemys.factory
 		
 		public final function produce(canvas:DisplayObjectContainer, object:Object = null):void
 		{
-			var product:IContentProduct = createProduct(object);			
+//			var startTime:Number = getTimer();
+//			var took:Number = getTimer() - startTime
+//			trace("Time measure", took,"milliseconds");
+			
+			var viewProduct:IContentProduct = createProduct(object);			
 			var executer:ICommandExecutor = createExecutor();
-			executer.loadCommands( createCommands(canvas,product) );
+			var commandProduct:IContentProduct = createCommands(canvas, viewProduct);
+			executer.loadCommands( Vector.<ICommand>(commandProduct.content as Array) );
 			executer.executeCommand();
+			viewProduct.dispose();
+			commandProduct.dispose();
 		}
 		
 		private function createExecutor():ICommandExecutor
@@ -26,15 +35,9 @@ package game.enemys.factory
 			return new IntervalCommandExecuter(1);
 		}
 		
-		private function createCommands(target:DisplayObjectContainer, prod:IContentProduct):Vector.<ICommand>
+		private function createCommands(target:DisplayObjectContainer, prod:IContentProduct):IContentProduct
 		{
-			var array:Array = prod.content as Array;
-			var vector:Vector.<ICommand> = new Vector.<ICommand>();
-			for (var i:int = 0, len:int = array.length; i < len; ++i) 
-			{
-				vector.push(new addChildCommand(target,array[i])); 
-			}
-			return vector;
+			return new CommandsProduct(target,prod);
 		}
 		
 		private function createProduct(obj:Object = null):IContentProduct
