@@ -1,16 +1,12 @@
 package game.enemys.view
 {
 	import game.enemys.controllers.EnemyController;
-	import game.enemys.factory.UnitFactory;
-	import game.enemys.models.EnemysModel;
 	
 	import loading.model.AssetsModel;
 	
-	import mvc.factory.IFactory;
 	import mvc.view.AbstractView;
 	
 	import starling.display.Button;
-	import starling.events.Event;
 	import starling.utils.Color;
 	
 	public class EnemyLayer extends AbstractView

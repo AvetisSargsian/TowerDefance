@@ -3,7 +3,7 @@ package menu.mediator
 	import menu.MainMenuScene;
 	
 	import mvc.view.AbstractView;
-	import mvc.view.mediator.SceneMediator;
+	import mvc.mediator.SceneMediator;
 	
 	import navigation.controller.NavigationController;
 	

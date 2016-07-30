@@ -1,22 +1,21 @@
 package game.bullets.factory
 {
 	import game.bullets.models.BulletModel;
-	import mvc.factory.AbstractFactory;
-	import mvc.factory.IProdactionLine;
 	
-	import mvc.model.IModel;
+	import mvc.factory.AbstractMethodFactory;
+	import mvc.factory.IStartProduct;
 	
 	import starling.display.DisplayObjectContainer;
 	
-	public class BulletFactory extends AbstractFactory
+	public class BulletFactory extends AbstractMethodFactory
 	{
 		public function BulletFactory()
 		{
 		}
 		
-		override protected function createProdactionLine(canvas:DisplayObjectContainer,model:IModel = null):IProdactionLine
+		override protected function createProduct(canvas:DisplayObjectContainer,obj:Object = null):IStartProduct
 		{
-			return new BulletProdactionLine(canvas, model as BulletModel);
+			return new BulletProduct(canvas, obj as BulletModel);
 		}
 	}
 }

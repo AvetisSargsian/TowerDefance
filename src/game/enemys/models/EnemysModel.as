@@ -1,15 +1,12 @@
 package game.enemys.models
 {
-	import game.map.models.MapModel;
 	import game.map.objects.Road;
 	import game.map.objects.Wave;
 	import game.map.objects.WavesDO;
-	import game.models.GameDataService;
 	
 	import mvc.model.AbstractModel;
 	
 	import starling.core.Starling;
-	import starling.events.Event;
 	
 	public class EnemysModel extends AbstractModel
 	{

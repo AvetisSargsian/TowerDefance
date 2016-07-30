@@ -1,11 +1,10 @@
 package game.enemys.view.mediator
 {
+	import game.enemys.builder.WaveBuilderDirector;
 	import game.enemys.controllers.EnemyController;
-	import game.enemys.factory.UnitFactory;
 	import game.enemys.models.EnemysModel;
 	import game.enemys.view.EnemyLayer;
 	
-	import mvc.factory.IFactory;
 	import mvc.mediator.AbstractMediator;
 	import mvc.view.AbstractView;
 	
@@ -13,17 +12,17 @@ package game.enemys.view.mediator
 	
 	public class EnemyLayerMediator extends AbstractMediator
 	{
-		private var _factory:IFactory;
+		private var waveBuilderDirector:WaveBuilderDirector;
 		private var _enemyM:EnemysModel;
 		private var _unitsCont:EnemyController;
 		
 		public function EnemyLayerMediator()
 		{
 			super();
+			
 			nativeVIew.addEventListener(Event.ADDED_TO_STAGE,onAddedTostege);
 			nativeVIew.addEventListener(Event.TRIGGERED,startNewWave);
-			
-			_factory = new UnitFactory();
+			waveBuilderDirector = new WaveBuilderDirector(nativeVIew);
 			_unitsCont = EnemyController.instance;
 			_enemyM = EnemysModel.instance;
 			_enemyM.addEventListener(EnemysModel.NO_ENEMY_LEFT,onWavesEnd);
@@ -41,6 +40,9 @@ package game.enemys.view.mediator
 			_unitsCont.resetEnemyModel();
 			_unitsCont.dispose();
 			_unitsCont = null;
+			
+			waveBuilderDirector.dispose();
+			waveBuilderDirector = null;
 			
 			nativeVIew.removeEventListener(Event.TRIGGERED,startNewWave);
 			
@@ -66,7 +68,7 @@ package game.enemys.view.mediator
 		
 		private function onNewWaveAdded(event:Event):void
 		{
-			_factory.produce(nativeVIew);
+			waveBuilderDirector.buildLineWave(_enemyM.newWave);
 		}
 		
 		private function onWavesEnd(event:Event):void

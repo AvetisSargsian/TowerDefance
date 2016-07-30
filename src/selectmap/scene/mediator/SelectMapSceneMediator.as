@@ -3,7 +3,7 @@ package selectmap.scene.mediator
 	import game.map.controllers.MapController;
 	
 	import mvc.view.AbstractView;
-	import mvc.view.mediator.SceneMediator;
+	import mvc.mediator.SceneMediator;
 	
 	import navigation.controller.NavigationController;
 	

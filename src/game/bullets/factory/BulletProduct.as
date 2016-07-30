@@ -2,13 +2,13 @@ package game.bullets.factory
 {
 	import game.bullets.models.BulletModel;
 	import game.bullets.view.BulletBaseView;
-	import mvc.factory.IProdactionLine;
+	import mvc.factory.IStartProduct;
 	
 	import starling.display.DisplayObjectContainer;
 	
-	public class BulletProdactionLine implements IProdactionLine
+	public class BulletProduct implements IStartProduct
 	{
-		public function BulletProdactionLine(canvas:DisplayObjectContainer,model:BulletModel)
+		public function BulletProduct(canvas:DisplayObjectContainer,model:BulletModel)
 		{
 			canvas.addChild(new BulletBaseView(model));
 		}

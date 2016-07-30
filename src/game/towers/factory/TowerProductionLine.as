@@ -1,13 +1,13 @@
 package game.towers.factory
 {
-	import mvc.factory.IProdactionLine;
+	import mvc.factory.IStartProduct;
 	import game.towers.models.TowerModel;
 	import game.towers.models.TowersHolderModel;
 	import game.towers.views.TowerBaseView;
 	
 	import starling.display.DisplayObjectContainer;
 	
-	public class TowerProductionLine implements IProdactionLine
+	public class TowerProductionLine implements IStartProduct
 	{
 		private var _canvas:DisplayObjectContainer;
 		private var _towerM:TowerModel;
