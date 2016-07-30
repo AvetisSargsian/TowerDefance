@@ -1,8 +1,9 @@
-package game.enemys.factory
+package game.enemys.builder.factory.products
 {
 	import mvc.factory.IContentProduct;
 	
 	import starling.display.DisplayObjectContainer;
+	import game.enemys.builder.factory.comands.AddChildCommand;
 	
 	public class CommandsProduct implements IContentProduct
 	{
@@ -28,7 +29,7 @@ package game.enemys.factory
 			_content = new Array();
 			for (var i:int = 0, len:int = array.length; i < len; ++i) 
 			{
-				_content.push(new addChildCommand(canvas,array[i])); 
+				_content.push(new AddChildCommand(canvas,array[i])); 
 			}
 		}	
 	}

@@ -1,4 +1,4 @@
-package game.enemys.factory
+package game.enemys.builder.factory.products
 {
 	import game.enemys.models.UnitModel;
 	import game.enemys.view.UnitBaseView;
@@ -6,12 +6,12 @@ package game.enemys.factory
 	
 	import mvc.factory.IContentProduct;
 	
-	public class EnemysProduct implements IContentProduct
+	public class EnemysViewProduct implements IContentProduct
 	{
 		private var _wave:Wave;
 		private var _content:Array;
 		
-		public function EnemysProduct(data:Object)
+		public function EnemysViewProduct(data:Object)
 		{
 			_wave = data as Wave;
 			_content = new Array();	

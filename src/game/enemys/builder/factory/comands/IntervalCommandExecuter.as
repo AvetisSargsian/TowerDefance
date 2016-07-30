@@ -1,4 +1,4 @@
-package game.enemys.factory
+package game.enemys.builder.factory.comands
 {
 	import mvc.command.interfaces.ICommand;
 	import mvc.command.interfaces.ICommandExecutor;

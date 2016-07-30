@@ -5,6 +5,9 @@ package flexUnitTests
 		[Before]
 		public function setUp():void
 		{
+			//			var startTime:Number = getTimer();
+			//			var took:Number = getTimer() - startTime
+			//			trace("Time measure", took,"milliseconds");
 		}
 		
 		[After]

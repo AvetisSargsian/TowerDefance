@@ -1,16 +1,16 @@
-package game.enemys.factory
+package game.enemys.builder.factory.comands
 {
 	import mvc.command.interfaces.ICommand;
 	
 	import starling.display.DisplayObject;
 	import starling.display.DisplayObjectContainer;
 
-	public class addChildCommand implements ICommand
+	public class AddChildCommand implements ICommand
 	{
 		private var canvas:DisplayObjectContainer;
 		private var child:DisplayObject;
 		
-		public function addChildCommand(canvas:DisplayObjectContainer, child:DisplayObject)
+		public function AddChildCommand(canvas:DisplayObjectContainer, child:DisplayObject)
 		{
 			this.canvas = canvas;
 			this.child = child;
