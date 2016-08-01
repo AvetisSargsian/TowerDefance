@@ -5,7 +5,11 @@
 	"towersTypes":[1,2],
 	
 	"wayPoints":[{ "x":30,"y":350,"direction":7 },
+				 { "x":200,"y":350,"direction":7 },
+				 { "x":400,"y":350,"direction":7 },
 				 { "x":640,"y":350,"direction":7 },
+				 { "x":800,"y":350,"direction":7 },
+				 { "x":1000,"y":350,"direction":7 },
 				 { "x":1250,"y":350,"direction":7 }],
 				 
 	"waves":[{ "scheme":"line", "total_count":10, "enemys_types":{"type1":10} },

@@ -145,7 +145,7 @@ package game.debugview
 			_lineShape.graphics.endFill();
 		}
 		
-		private function findeProectionPoint(pointA:Point, pointB:Point, pointC:Point):Point//Number
+		private function findeProectionPoint(pointA:Point, pointB:Point, pointC:Point):Point
 		{
 			var abVec:Point = new Point(pointB.x - pointA.x, pointB.y - pointA.y),
 				acVec:Point = new Point(pointC.x - pointA.x, pointC.y - pointA.y),

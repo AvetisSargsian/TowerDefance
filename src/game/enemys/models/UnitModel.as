@@ -126,6 +126,7 @@ package game.enemys.models
 			makeStep();
 		}	
 		
+//		private var offset:int = 10;
 		protected function makeStep():void
 		{
 			if (_destination) 
@@ -141,7 +142,7 @@ package game.enemys.models
 				}
 				else
 				{
-					_position.offset(dX, dY);
+					_position.offset(dX, dY); 
 					invokeCallBacks(UnitModel.UPDATE);
 				} 
 			}
@@ -159,12 +160,22 @@ package game.enemys.models
 			_damage = 2; 
 		}
 		
+		private function init(road:Road):void
+		{
+			_road = road;
+			_destination = new Point();
+			_position = new Point(_road.getPointByIndex(_curentWayPointIndex).x,
+				_road.getPointByIndex(_curentWayPointIndex).y + random(40) );
+			
+			findeNewDestination();
+		}
+		
 		protected function findeNewDestination():void
 		{
 			var wPoint:WayPoint = _road.getPointByIndex(++_curentWayPointIndex);	
 			if (wPoint)
 			{
-				_destination.setTo(wPoint.x, wPoint.y);
+				_destination.setTo(wPoint.x, wPoint.y + random(40));
 				_destVector = _destination.subtract(_position);
 				_rotataionAngle = Math.atan2(_destVector.y,_destVector.x);
 				
@@ -175,14 +186,12 @@ package game.enemys.models
 			}
 		}
 		
-		private function init(road:Road):void
+		private function random(range:Number):Number
 		{
-			_road = road;
-			_destination = new Point();
-			_position = new Point(_road.getPointByIndex(_curentWayPointIndex).x,
-								  _road.getPointByIndex(_curentWayPointIndex).y );
+			var rand:Number = Math.random();
+				rand *= rand < 0.5 ? -range : range;  
 			
-			findeNewDestination();
+			return  rand; 
 		}
 	}
 }
