@@ -2,6 +2,7 @@ package game.scene.mediator
 {
 	import game.bullets.view.mediator.AmmunitionLayerMediator;
 	import game.enemys.view.mediator.EnemyLayerMediator;
+	import game.gui.UserInterfaceMediator;
 	import game.map.controllers.MapController;
 	import game.map.models.MapModel;
 	import game.models.GameModel;
@@ -21,19 +22,23 @@ package game.scene.mediator
 		private var gameModel:GameModel;
 		private var mapModel:MapModel;
 		
+		private var UIMediator:AbstractMediator;
 		private var enemyLayerMediator:AbstractMediator;
 		private var towerLayerMediator:AbstractMediator;
 		private var ammosLayerMediator:AbstractMediator;
 		
+		
 		public function GameSceneMediator()
 		{
 			super();
+			
 			nativeVIew.addEventListener(Event.REMOVED_FROM_STAGE,onRemove);
 			nativeVIew.addEventListener(Event.ADDED_TO_STAGE,onAdded);
 			
 			enemyLayerMediator = new EnemyLayerMediator(); 
 			towerLayerMediator = new TowerLayerMediator();
 			ammosLayerMediator = new AmmunitionLayerMediator();
+			UIMediator = new UserInterfaceMediator();
 			
 			gameModel = GameModel.instance;
 			mapModel = MapModel.instance;
@@ -52,6 +57,9 @@ package game.scene.mediator
 			
 			ammosLayerMediator.dispose();
 			ammosLayerMediator = null;
+			
+			UIMediator.dispose();
+			UIMediator = null;
 			
 			nativeVIew.removeEventListener(Event.REMOVED_FROM_STAGE,onRemove);
 			nativeVIew.removeEventListener(Event.ADDED_TO_STAGE,onAdded);
@@ -76,9 +84,10 @@ package game.scene.mediator
 		
 		private function onAdded():void
 		{
+			UIMediator.contextView = nativeVIew;
 			enemyLayerMediator.contextView = nativeVIew;
 			towerLayerMediator.contextView = nativeVIew;
-			ammosLayerMediator.contextView = nativeVIew;	
+			ammosLayerMediator.contextView = nativeVIew;
 		}
 	}
 }

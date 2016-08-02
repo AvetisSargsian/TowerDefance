@@ -6,7 +6,6 @@ package game.towers.views.mediator
 	
 	import mvc.factory.IFactory;
 	import mvc.mediator.AbstractMediator;
-	import mvc.view.AbstractView;
 	
 	import starling.events.Event;
 	
@@ -15,7 +14,6 @@ package game.towers.views.mediator
 		private var factory:IFactory;
 		private var towersModel:TowersHolderModel;
 		private var towerController:TowerController;
-		private var towerPanelMediator:TowersPanelMediator;
 		
 		public function TowerLayerMediator()
 		{
@@ -26,25 +24,22 @@ package game.towers.views.mediator
 			towersModel = TowersHolderModel.instance;
 			towersModel.addEventListener(TowersHolderModel.PROJECTION_CREATED,onProjectionCreate);
 			towerController = TowerController.instance;
-			towerPanelMediator = new TowersPanelMediator();
 		}
 		
 		public override function dispose():void
 		{
 			factory = null;
+			
 			towersModel = null;
 			towerController.stopJuggling();
 			towerController = null;
-			towerPanelMediator.dispose();
-			towerPanelMediator = null;
+			
 			super.dispose();
 		}
 		
 		private function onAddedToStage(event:Event):void
 		{
 			nativeVIew.removeEventListener(Event.ADDED_TO_STAGE,onAddedToStage);
-			towerPanelMediator.contextView = nativeVIew;
-			towerPanelMediator.nativeVIew.x = Constants.STAGE_WIDTH - towerPanelMediator.nativeVIew.width;
 			towerController.startJuggling();	
 		}
 		

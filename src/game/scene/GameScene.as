@@ -18,24 +18,19 @@ package game.scene
 			mapModel = MapModel.instance;
 				
 			this.onAddedToStage = onAdded;
-			this.onRemoveFromStage = onRemove;
 		}	
 		
 		private function onAdded():void
 		{
 			var bg:Image = new Image(assetManager.getTexture(mapModel.mapName));
 			addChild(bg);
+			mapModel = null;
 			
 			CONFIG::map_dev
 			{
 				var roadDebugLayer:WayPointDebugLayer = new WayPointDebugLayer();
 				addChild(roadDebugLayer);
 			}
-		}
-		
-		private function onRemove():void
-		{
-			mapModel = null;
 		}
 	}
 }

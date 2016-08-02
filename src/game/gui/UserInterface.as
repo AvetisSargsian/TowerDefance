@@ -1,35 +1,33 @@
 package game.gui
 {
-	import loading.model.AssetsModel;
+	import game.gui.panels.ButtonsPanel;
+	import game.towers.views.TowersPanel;
 	
 	import mvc.view.AbstractView;
 	
-	import starling.display.Button;
-	import starling.events.Event;
-	import starling.utils.Color;
-	
 	public class UserInterface extends AbstractView
 	{
-		private var _pouseButton:Button;
+		public static const BUTTONS_PANEL:String = "buttonsPanel";
+		public static const TOWERS_PANEL:String = "towersPanel";
 		
 		public function UserInterface()
 		{
 			super();
-			
-			_pouseButton = new Button(AssetsModel.drawRoundRectTexture(100,50,Color.BLUE),"POUSE");
+			this.onAddedToStage = onAdded;
 		}
 		
-		override protected function onAddedToStage(event:Event):void
+		private function onAdded():void
 		{
-			super.onAddedToStage(event);
+			var btnPanel:ButtonsPanel = new ButtonsPanel();
+			btnPanel.name = BUTTONS_PANEL;
+			btnPanel.x = 10;
+			btnPanel.y = 20;
+			addChild(btnPanel);
 			
-			addChild(_pouseButton);
+			var towersPanel:TowersPanel = new TowersPanel();
+			towersPanel.name = TOWERS_PANEL;
+			addChild(towersPanel);
+			towersPanel.x = Constants.STAGE_WIDTH - towersPanel.width - 10;
 		}
-		
-		override protected function onRemoveFromStage(event:Event):void
-		{
-			super.onRemoveFromStage(event);
-		}
-		
 	}
 }
