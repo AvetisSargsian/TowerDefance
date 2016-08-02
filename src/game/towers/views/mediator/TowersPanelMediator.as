@@ -6,16 +6,14 @@ package game.towers.views.mediator
 	import mvc.mediator.AbstractMediator;
 	import mvc.view.AbstractView;
 	
-	import starling.display.DisplayObjectContainer;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	
 	public class TowersPanelMediator extends AbstractMediator
 	{
-		public function TowersPanelMediator()
+		public function TowersPanelMediator(thisView:AbstractView = null)
 		{
-			super();
+			super(thisView);
 			nativeVIew.addEventListener(TouchEvent.TOUCH,onTouch);
 		}
 		

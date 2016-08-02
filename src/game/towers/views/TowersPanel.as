@@ -7,7 +7,6 @@
 	import mvc.view.AbstractView;
 	
 	import starling.display.Image;
-	import starling.events.Event;
 	import starling.utils.Color;
 	
 	public class TowersPanel extends AbstractView
