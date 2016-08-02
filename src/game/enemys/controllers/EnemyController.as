@@ -1,11 +1,7 @@
 package game.enemys.controllers
 {
-	import flash.utils.getTimer;
-	
 	import game.enemys.models.EnemysModel;
 	import game.enemys.models.UnitModel;
-	import game.map.models.MapModel;
-	import game.map.objects.Road;
 	import game.models.GameModel;
 	
 	import mvc.controller.AbstractController;

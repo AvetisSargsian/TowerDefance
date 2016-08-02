@@ -1,10 +1,11 @@
 package game.enemys.builder.factory.comands
 {
+	import game.models.GameModel;
+	
 	import mvc.command.interfaces.ICommand;
 	import mvc.command.interfaces.ICommandExecutor;
 	
 	import starling.animation.DelayedCall;
-	import starling.core.Starling;
 	
 	public class IntervalCommandExecuter implements ICommandExecutor
 	{
@@ -32,7 +33,7 @@ package game.enemys.builder.factory.comands
 		{
 			delayCall = new DelayedCall(releaseUnit,frequency);
 			delayCall.repeatCount = comands.length;
-			Starling.juggler.add(delayCall);
+			GameModel.instance.jugler.add(delayCall);
 			releaseUnit();
 		}
 		
@@ -50,7 +51,7 @@ package game.enemys.builder.factory.comands
 		private function dispose():void
 		{
 			comands = null;
-			Starling.juggler.remove(delayCall);
+			GameModel.instance.jugler.remove(delayCall);
 			delayCall = null;
 		}
 	}

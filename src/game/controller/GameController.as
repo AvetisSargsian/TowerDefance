@@ -32,8 +32,15 @@ package game.controller
 			_gameModel.reciveGameData(data);
 			MapModel.instance.setUpRoads(_gameModel.gameData.wayPointDo);
 			EnemysModel.instance.provideWaveData(_gameModel.gameData.wavesDo);
-			EnemysModel.instance.initialize(MapModel.instance.roads[0]);
-			
+			EnemysModel.instance.initialize(MapModel.instance.roads[0]);			
+		}
+		
+		public function handleGamePouse():void
+		{
+			if (_gameModel.isPoused())
+				_gameModel.continueGame();
+			else
+				_gameModel.pouseGame();
 		}
 		
 		override public function dispose():void

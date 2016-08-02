@@ -1,30 +1,16 @@
 package game.models
 {
 	import game.map.objects.GeneralInfoDO;
+	import game.map.objects.PersedGameData;
 	
 	import mvc.model.AbstractModel;
 	
-	import starling.events.Event;
-	import game.map.objects.PersedGameData;
+	import starling.animation.Juggler;
+	import starling.core.Starling;
 	
 	public class GameModel extends AbstractModel
 	{
 		private static var _instance:GameModel;
-		
-		public function get gameData():PersedGameData
-		{
-			return _gameData;
-		}
-
-		public function get mapName():String
-		{
-			return _mapName;
-		}
-
-		public function get gameSpeed():Number
-		{
-			return _gameSpeed;
-		}
 
 		public static function get instance( ):GameModel
 		{
@@ -41,11 +27,29 @@ package game.models
 		private var _gameSpeed:Number;
 		private var _mapName:String;
 		private var _gameData:PersedGameData;
+		private var _jugler:Juggler;
 		
 		public function GameModel(pvt:PrivateClass)
 		{
 			super();
 			_gameService = GameDataService.instance;
+			_jugler = new Juggler();
+			anpouse();
+		}
+		
+		public function get jugler():Juggler
+		{
+			return _jugler;
+		}
+		
+		public function get gameData():PersedGameData
+		{
+			return _gameData;
+		}
+		
+		public function get gameSpeed():Number
+		{
+			return _gameSpeed;
 		}
 		
 		public function pouseGame():void
@@ -79,11 +83,11 @@ package game.models
 			}
 		}
 		
-//		private function onParsingCoplete(event:Event):void
-//		{
-//			_gameService.removeEventListener(GameDataService.SERVICE_DATA_PARSING_COMPLETE,onParsingCoplete);
-//			processGenInfo(event.data[GameDataService.SERVICE_GENERAL_INFO]);
-// 		}
+		public function reciveGameData(data:Object):void
+		{
+			_gameData = _gameService.processLevelXML(data);
+			processGenInfo(_gameData.generalInfo)
+		}
 		
 		private function processGenInfo(genInfo:GeneralInfoDO):void
 		{
@@ -99,18 +103,12 @@ package game.models
 		
 		private function pouse():void
 		{
-			
+			Starling.juggler.remove(_jugler);	
 		}
 		
 		private function anpouse():void
 		{
-			
-		}
-		
-		public function reciveGameData(data:Object):void
-		{
-			_gameData = _gameService.processLevelXML(data);
-			processGenInfo(_gameData.generalInfo)
+			Starling.juggler.add(_jugler);
 		}
 	}
 }

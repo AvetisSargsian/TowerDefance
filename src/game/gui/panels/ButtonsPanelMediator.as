@@ -1,5 +1,6 @@
 package game.gui.panels
 {
+	import game.controller.GameController;
 	import game.enemys.controllers.EnemyController;
 	
 	import mvc.mediator.AbstractMediator;
@@ -11,6 +12,7 @@ package game.gui.panels
 	public class ButtonsPanelMediator extends AbstractMediator
 	{
 		private var unitsCont:EnemyController;
+		private var gameController:GameController;
 		
 		public function ButtonsPanelMediator(thisVeiw:AbstractView = null)
 		{
@@ -18,12 +20,14 @@ package game.gui.panels
 			
 			nativeVIew.addEventListener(Event.TRIGGERED,onButtonPushed);
 			unitsCont = EnemyController.instance;
+			gameController = GameController.instance;
 		}
 		
 		override public function dispose():void
 		{
 			nativeVIew.removeEventListener(Event.TRIGGERED,onButtonPushed);
 			unitsCont = null;
+			gameController = null;
 			super.dispose();
 		}
 		
@@ -43,7 +47,8 @@ package game.gui.panels
 					break;
 				}
 				case ButtonsPanel.POUSE_BUTTON:
-				{		
+				{	
+					gameController.handleGamePouse();
 					break;
 				}
 			}
