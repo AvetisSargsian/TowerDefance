@@ -41,7 +41,6 @@ package loading.model
 		public function AssetsModel(pvt:PrivateClass)
 		{
 			super();
-			
 			_assetsManager = new AssetManager();
 		}
 //		========================================================================
@@ -52,16 +51,16 @@ package loading.model
 			bgShape.graphics.beginFill(color);
 			bgShape.graphics.drawRoundRect(0, 0, width, hight, round, round);
 			bgShape.graphics.endFill();
-			
 			var bgBitmapData:BitmapData = new BitmapData(width, hight, true,0x00000000);
 			bgBitmapData.draw(bgShape);
-			return Texture.fromBitmapData(bgBitmapData, false, false, 1);			
+			return Texture.fromBitmapData(bgBitmapData, false, false, 1);
 		}
 //		========================================================================
 		public function getTexture(name:String):Texture
 		{
 			var texture:Texture = _assetsManager.getTexture(name);
-			return texture != null ? texture : drawRoundRectTexture(200,200,Color.RED); 
+			texture != null ? texture : drawRoundRectTexture(200,200,Color.RED);			
+			return texture;
 		}
 //		========================================================================
 		public function getSound(name:String):Sound

@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
-<!-- $TexturePacker:SmartUpdate:b31a48e583a4772d8f21ccbe360f0a36$ -->
 <TextureAtlas imagePath="atlas.png">
     <SubTexture name="bullets/sparkle1" x="2" y="2" width="32" height="32"/>
     <SubTexture name="bullets/sparkle2" x="36" y="2" width="32" height="32"/>

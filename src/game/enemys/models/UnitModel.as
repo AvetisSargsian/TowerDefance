@@ -126,7 +126,6 @@ package game.enemys.models
 			makeStep();
 		}	
 		
-//		private var offset:int = 10;
 		protected function makeStep():void
 		{
 			if (_destination) 

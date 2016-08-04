@@ -9,7 +9,7 @@ package game.enemys.controllers
 	public class EnemyController extends AbstractController
 	{
 		private static var _instance:EnemyController;
-		private var _enemysM:EnemysModel;
+		private var enemysM:EnemysModel;
 		
 		public static function get instance( ):EnemyController
 		{
@@ -24,14 +24,14 @@ package game.enemys.controllers
 		{
 			super();
 			
-			_enemysM = EnemysModel.instance;
+			enemysM = EnemysModel.instance;
 		}
 		
 		public function lunchEnemys():void
 		{
-			if (!_enemysM.isWavesLunched)
+			if (!enemysM.isWavesLunched)
 			{				
-				_enemysM.isWavesLunched = true;
+				enemysM.isWavesLunched = true;
 				startNewWave(0);
 				startJuggling();
 			}
@@ -39,13 +39,13 @@ package game.enemys.controllers
 		
 		public function startNewWave(delay:Number = 2):void
 		{
-			if (_enemysM.isWavesLunched)
-				_enemysM.addNewWave(delay);
+			if (enemysM.isWavesLunched)
+				enemysM.addNewWave(delay);
 		}
 		
 		public function resetEnemyModel():void
 		{
-			_enemysM.reset();
+			enemysM.reset();
 		}
 		
 		public override function advanceTime(time:Number):void
@@ -55,27 +55,27 @@ package game.enemys.controllers
 		
 		public override function dispose():void
 		{
-			_enemysM = null;
+			enemysM = null;
 			_instance = null;
 		}
 		
 		private function updateUnits():void
 		{ 
-			for (var i:int = 0,len:int = _enemysM.enemyCount(); i < len; ++i) 
+			for (var i:int = 0,len:int = enemysM.enemyCount(); i < len; ++i) 
 			{
-				var unit:UnitModel = _enemysM.getEnemyByIndex(i);
+				var unit:UnitModel = enemysM.getEnemyByIndex(i);
 				if (unit && unit.isOnStage)
 				{
 					if(unit.isDead)
 					{
 						unit.dispose();
-						_enemysM.removEnemyByIndex(i);
+						enemysM.removEnemyByIndex(i);
 					}
 					else if(unit.isEscaped)
 					{
 						GameModel.instance.takeDamage(unit.damage);	
 						unit.dispose();
-						_enemysM.removEnemyByIndex(i);
+						enemysM.removEnemyByIndex(i);
 						
 					}else
 					{
@@ -92,8 +92,5 @@ package game.enemys.controllers
 }
 class PrivateClass
 {
-	public function PrivateClass( ) 
-	{
-		
-	}
+	public function PrivateClass( ) {}
 }
