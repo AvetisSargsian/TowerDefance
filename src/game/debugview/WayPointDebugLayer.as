@@ -109,7 +109,15 @@ package game.debugview
 						drawWayPoint(wayPoint);
 					
 						if (wayPoint1)
+						{
 							drawLine(wayPoint,wayPoint1);
+							
+							drawLine(new WayPoint(wayPoint.x,wayPoint.y-50,wayPoint.direction), 
+								new WayPoint(wayPoint1.x,wayPoint1.y-50,wayPoint1.direction));
+							
+							drawLine(new WayPoint(wayPoint.x,wayPoint.y+50,wayPoint.direction),
+								new WayPoint(wayPoint1.x,wayPoint1.y+50,wayPoint1.direction));
+						}
 					}
 				}
 			}

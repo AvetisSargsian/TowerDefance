@@ -54,7 +54,6 @@ package game.towers.controllers
 					y:Number = touch.globalY;
 				var bottom:Number = touch.target.bounds.bottom;
 				var top:Number = touch.target.bounds.top;
-				trace(y);
 				towerHolderModel.towerProjection.setNewPos(x, y, calculateDistance(x, y), distanseFromNeibors(x,y));
 			}
 			else if (touch.phase == TouchPhase.BEGAN)

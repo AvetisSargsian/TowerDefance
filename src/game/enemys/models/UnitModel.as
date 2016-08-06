@@ -164,7 +164,7 @@ package game.enemys.models
 			_road = road;
 			_destination = new Point();
 			_position = new Point(_road.getPointByIndex(_curentWayPointIndex).x,
-				_road.getPointByIndex(_curentWayPointIndex).y + random(40) );
+				_road.getPointByIndex(_curentWayPointIndex).y + random(32)); 
 			
 			findeNewDestination();
 		}
@@ -174,7 +174,7 @@ package game.enemys.models
 			var wPoint:WayPoint = _road.getPointByIndex(++_curentWayPointIndex);	
 			if (wPoint)
 			{
-				_destination.setTo(wPoint.x, wPoint.y + random(40));
+				_destination.setTo(wPoint.x, wPoint.y + random(32)); 
 				_destVector = _destination.subtract(_position);
 				_rotataionAngle = Math.atan2(_destVector.y,_destVector.x);
 				
@@ -187,10 +187,10 @@ package game.enemys.models
 		
 		private function random(range:Number):Number
 		{
-			var rand:Number = Math.random();
-				rand *= rand < 0.5 ? -range : range;  
+			var random:Number = Math.random();
+			var randomInRange:Number = random * range;
 			
-			return  rand; 
+			return  Math.random() > 0.5 ? randomInRange : -randomInRange; 
 		}
 	}
 }

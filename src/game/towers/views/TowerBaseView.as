@@ -35,27 +35,12 @@ package game.towers.views
 			return this.name;
 		}
 		
-		private function onAdded():void
-		{
-			createGraphic();
-		}
-		
-		private function onRemove():void
-		{
-			model.removeCallBack(TowerModel.CHANGE_POSITIONS,onChangePos);
-			model.removeCallBack(TowerModel.DISPOSED,onModelDisposed);
-			model.removeCallBack(TowerModel.BUILDED,onTowerBuild);
-			model.removeCallBack(TowerModel.SHOOTING,towerShoot);
-			model = null;
-			removeEventListener(TouchEvent.TOUCH,onTouch);
-		}
-		
 		protected function towerShoot():void
 		{
 			AmmunitionController.instance.createBullet(model);
 		}
 		
-		protected function createGraphic():void
+		protected function createGraphics():void
 		{
 			circuleImg = new Image(assetManager.getTexture("100x100"));
 			circuleImg.alignPivot();
@@ -68,9 +53,21 @@ package game.towers.views
 			addChild(towerIcon);
 		}
 		
-		private function drawCircule(radius:Number, color:uint):void
+		private function onAdded():void
 		{
-			circuleImg.color = color;
+			createGraphics();
+		}
+		
+		private function onRemove():void
+		{
+			model.removeCallBack(TowerModel.CHANGE_POSITIONS,onChangePos);
+			model.removeCallBack(TowerModel.DISPOSED,onModelDisposed);
+			model.removeCallBack(TowerModel.BUILDED,onTowerBuild);
+			model.removeCallBack(TowerModel.SHOOTING,towerShoot);
+			model = null;
+			circuleImg = null;
+			
+			removeEventListener(TouchEvent.TOUCH,onTouch);
 		}
 		
 		private function onTowerBuild():void
@@ -82,8 +79,6 @@ package game.towers.views
 			circuleImg.color = Color.GREEN;
 			addChildAt(circuleImg,0);
 			circuleImg.visible = false;
-			
-			drawCircule(model.shootRange, Color.GREEN)
 
 			addEventListener(TouchEvent.TOUCH,onTouch);
 		}
@@ -93,13 +88,8 @@ package game.towers.views
 			var touch:Touch = event.getTouch(this);
 			if (touch && touch.phase == TouchPhase.BEGAN)
 			{
-				drawShootRange();
+				circuleImg.visible = ! circuleImg.visible;
 			}
-		}
-		
-		private function drawShootRange():void
-		{
-			circuleImg.visible = ! circuleImg.visible;
 		}
 		
 		private function onChangePos():void
@@ -107,13 +97,11 @@ package game.towers.views
 			this.x = model.x;
 			this.y = model.y;
 			
-			var color:uint = model.canBeBuilded ? Color.GREEN : Color.RED; 
-			drawCircule(model.buildDistance,color);
+			circuleImg.color = model.canBeBuilded ? Color.GREEN : Color.RED; 
 		}
 		
 		private function onModelDisposed():void
 		{
-			circuleImg = null;
 			removeFromParent(true);
 		}
 	}
