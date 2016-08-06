@@ -59,8 +59,7 @@ package loading.model
 		public function getTexture(name:String):Texture
 		{
 			var texture:Texture = _assetsManager.getTexture(name);
-			texture != null ? texture : drawRoundRectTexture(200,200,Color.RED);			
-			return texture;
+			return texture != null ? texture : drawRoundRectTexture(200,200,Color.RED);			
 		}
 //		========================================================================
 		public function getSound(name:String):Sound

@@ -3,13 +3,9 @@ package game.towers.views
 	import game.bullets.controllers.AmmunitionController;
 	import game.towers.models.TowerModel;
 	
-	import loading.model.AssetsModel;
-	
 	import mvc.view.AbstractView;
 	
 	import starling.display.Image;
-	import starling.display.Shape;
-	import starling.events.Event;
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	import starling.events.TouchPhase;
@@ -17,8 +13,8 @@ package game.towers.views
 	
 	public class TowerBaseView extends AbstractView
 	{	
-		private var _model:TowerModel;
-		private var distanceCircule:Shape;
+		private var model:TowerModel;
+		private var circuleImg:Image;
 		
 		public function TowerBaseView(model:TowerModel)
 		{
@@ -27,12 +23,11 @@ package game.towers.views
 			this.onAddedToStage = onAdded;
 			this.onRemoveFromStage = onRemove;
 			
-			_model = model;
-			_model.registerCallBack(TowerModel.CHANGE_POSITIONS,onChangePos);
-			_model.registerCallBack(TowerModel.DISPOSED,onModelDisposed);
-			_model.registerCallBack(TowerModel.BUILDED,onTowerBuild);
-			_model.registerCallBack(TowerModel.SHOOTING,towerShoot);
-			distanceCircule = new Shape();
+			this.model = model;
+			model.registerCallBack(TowerModel.CHANGE_POSITIONS,onChangePos);
+			model.registerCallBack(TowerModel.DISPOSED,onModelDisposed);
+			model.registerCallBack(TowerModel.BUILDED,onTowerBuild);
+			model.registerCallBack(TowerModel.SHOOTING,towerShoot);
 		}
 		
 		public function toString():String
@@ -42,46 +37,53 @@ package game.towers.views
 		
 		private function onAdded():void
 		{
-			addChild(distanceCircule);
 			createGraphic();
 		}
 		
 		private function onRemove():void
 		{
-			_model.removeCallBack(TowerModel.CHANGE_POSITIONS,onChangePos);
-			_model.removeCallBack(TowerModel.DISPOSED,onModelDisposed);
-			_model.removeCallBack(TowerModel.BUILDED,onTowerBuild);
-			_model.removeCallBack(TowerModel.SHOOTING,towerShoot);
-			_model = null;
+			model.removeCallBack(TowerModel.CHANGE_POSITIONS,onChangePos);
+			model.removeCallBack(TowerModel.DISPOSED,onModelDisposed);
+			model.removeCallBack(TowerModel.BUILDED,onTowerBuild);
+			model.removeCallBack(TowerModel.SHOOTING,towerShoot);
+			model = null;
 			removeEventListener(TouchEvent.TOUCH,onTouch);
 		}
 		
 		protected function towerShoot():void
 		{
-			AmmunitionController.instance.createBullet(_model);
+			AmmunitionController.instance.createBullet(model);
 		}
 		
 		protected function createGraphic():void
 		{
-			var _towerIcon:Image = new Image(AssetsModel.drawRoundRectTexture(30,30,Color.BLUE));
-			_towerIcon.alignPivot();
-			addChild(_towerIcon);
+			circuleImg = new Image(assetManager.getTexture("100x100"));
+			circuleImg.alignPivot();
+			circuleImg.color = Color.GREEN;
+			addChild(circuleImg);
+			
+			var towerIcon:Image = new Image(assetManager.getTexture("Archer_Tower"));
+			towerIcon.alignPivot();
+			towerIcon.y = -30;
+			addChild(towerIcon);
 		}
 		
 		private function drawCircule(radius:Number, color:uint):void
 		{
-			distanceCircule.graphics.clear();
-			distanceCircule.graphics.lineStyle(0);
-			distanceCircule.graphics.beginFill(color,.5);
-			distanceCircule.graphics.drawCircle(0, 0, radius);
-			distanceCircule.graphics.endFill();
+			circuleImg.color = color;
 		}
 		
-		
 		private function onTowerBuild():void
-		{
-			distanceCircule.visible = false;
-			drawCircule(_model.shootRange, Color.GREEN)
+		{	
+			removeChild(circuleImg);
+			circuleImg = new Image(assetManager.getTexture("200x200"));
+			circuleImg.alignPivot();
+			circuleImg.alpha = 0.3;
+			circuleImg.color = Color.GREEN;
+			addChildAt(circuleImg,0);
+			circuleImg.visible = false;
+			
+			drawCircule(model.shootRange, Color.GREEN)
 
 			addEventListener(TouchEvent.TOUCH,onTouch);
 		}
@@ -97,20 +99,21 @@ package game.towers.views
 		
 		private function drawShootRange():void
 		{
-			distanceCircule.visible = ! distanceCircule.visible
+			circuleImg.visible = ! circuleImg.visible;
 		}
 		
 		private function onChangePos():void
 		{
-			this.x = _model.x;
-			this.y = _model.y;
+			this.x = model.x;
+			this.y = model.y;
 			
-			var color:uint = _model.canBeBuilded ? Color.GREEN : Color.RED; 
-			drawCircule(_model.buildDistance,color);
+			var color:uint = model.canBeBuilded ? Color.GREEN : Color.RED; 
+			drawCircule(model.buildDistance,color);
 		}
 		
 		private function onModelDisposed():void
 		{
+			circuleImg = null;
 			removeFromParent(true);
 		}
 	}

@@ -2,6 +2,7 @@ package game.gui.panels
 {
 	import game.controller.GameController;
 	import game.enemys.controllers.EnemyController;
+	import game.models.GameModel;
 	
 	import mvc.mediator.AbstractMediator;
 	import mvc.view.AbstractView;
@@ -49,6 +50,8 @@ package game.gui.panels
 				case ButtonsPanel.POUSE_BUTTON:
 				{	
 					gameController.handleGamePouse();
+					(nativeVIew.getChildByName(ButtonsPanel.POUSE_BUTTON) as Button).text = 
+						GameModel.instance.isPoused() ? "CONTINUE" : "POUSE";
 					break;
 				}
 			}

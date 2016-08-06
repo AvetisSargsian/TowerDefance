@@ -17,7 +17,6 @@ package game.towers.controllers
 	public class TowerController extends AbstractController
 	{
 		private static var _instance:TowerController;
-		
 		public static function get instance( ):TowerController
 		{
 			if (_instance == null)
@@ -27,9 +26,12 @@ package game.towers.controllers
 			return _instance;
 		}
 		
+		private var towerHolderModel:TowersHolderModel;
+		
 		public function TowerController(pvt:PrivateClass)
 		{
 			super();
+			towerHolderModel = TowersHolderModel.instance;
 		}
 		
 		public override function advanceTime(time:Number):void
@@ -39,38 +41,39 @@ package game.towers.controllers
 		
 		public function updateTowers():void
 		{
-			var tModel:TowersHolderModel = TowersHolderModel.instance;
 			var eModel:EnemysModel = EnemysModel.instance;
-			setTargets(tModel,eModel);
-			update(tModel);
+			setTargets(towerHolderModel,eModel);
+			update(towerHolderModel);
 		}
 		
 		public function handlePanelTouch(touch:Touch):void
 		{
 			if (touch.phase == TouchPhase.MOVED)
 			{
-				var x:Number = touch.globalX;
-				var y:Number = touch.globalY;
-				TowersHolderModel.instance.towerProjection.setNewPos(x, y, calculateDistance(x,y), distanseFromNeibors(x,y));
+				var x:Number = touch.globalX,
+					y:Number = touch.globalY;
+				var bottom:Number = touch.target.bounds.bottom;
+				var top:Number = touch.target.bounds.top;
+				trace(y);
+				towerHolderModel.towerProjection.setNewPos(x, y, calculateDistance(x, y), distanseFromNeibors(x,y));
 			}
 			else if (touch.phase == TouchPhase.BEGAN)
 			{
-				TowersHolderModel.instance.createTowerProjection(touch.target.name);
+				towerHolderModel.createTowerProjection(touch.target.name);
 			}
 			else if (touch.phase == TouchPhase.ENDED)
 			{
-				TowersHolderModel.instance.buildTowerProjection();
+				towerHolderModel.buildTowerProjection();
 			}
 		}
 		
 		private function distanseFromNeibors(x:Number, y:Number):Number
 		{
-			var tModel:TowersHolderModel = TowersHolderModel.instance,
-				dist:Number = Number.MAX_VALUE,
+			var dist:Number = Number.MAX_VALUE,
 				p:Point = new Point(x,y);
-			for (var i:int = 0, len:int = tModel.towersCount(); i < len; ++i) 
+			for (var i:int = 0, len:int = towerHolderModel.towersCount(); i < len; ++i) 
 			{
-				var tower:TowerModel = tModel.getTowerByIndex(i),
+				var tower:TowerModel = towerHolderModel.getTowerByIndex(i),
 					temp:Number = Point.distance(p,tower.positionPoint);
 				if (temp < dist)
 					dist = temp;
@@ -152,12 +155,14 @@ package game.towers.controllers
 				}
 			}
 		}		
+		
+		override public function dispose():void
+		{
+			towerHolderModel = null;
+		}
 	}
 }
 class PrivateClass
 {
-	public function PrivateClass( ) 
-	{
-		
-	}
+	public function PrivateClass( )	{}
 }

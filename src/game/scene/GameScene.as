@@ -28,8 +28,8 @@ package game.scene
 			
 			CONFIG::map_dev
 			{
-//				var roadDebugLayer:WayPointDebugLayer = new WayPointDebugLayer();
-//				addChild(roadDebugLayer);
+				var roadDebugLayer:WayPointDebugLayer = new WayPointDebugLayer();
+				addChild(roadDebugLayer);
 			}
 		}
 	}
