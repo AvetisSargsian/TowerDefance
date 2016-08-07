@@ -7,7 +7,6 @@ package game.enemys.view
 	import mvc.view.AbstractView;
 	
 	import starling.display.Image;
-	import starling.events.Event;
 	import starling.utils.Color;
 	
 	public class UnitBaseView extends AbstractView
@@ -44,7 +43,8 @@ package game.enemys.view
 		
 		protected function drawUnit():void
 		{
-			var img:Image = new Image(AssetsModel.drawRoundRectTexture(35,10,Color.GREEN,5));
+//			var img:Image = new Image(AssetsModel.drawRoundRectTexture(35,10,Color.GREEN,5));
+			var img:Image = new Image(assetManager.getTexture("enemies/enemyA_b_03"));
 			addChild(img);
 			
 			alignPivot();

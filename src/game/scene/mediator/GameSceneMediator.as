@@ -23,8 +23,8 @@ package game.scene.mediator
 		private var mapModel:MapModel;
 		
 		private var UIMediator:AbstractMediator;
-		private var enemyLayerMediator:AbstractMediator;
 		private var towerLayerMediator:AbstractMediator;
+		private var enemyLayerMediator:AbstractMediator;
 		private var ammosLayerMediator:AbstractMediator;
 		
 		
@@ -85,8 +85,8 @@ package game.scene.mediator
 		private function onAdded():void
 		{
 			UIMediator.contextView = nativeVIew;
-			enemyLayerMediator.contextView = nativeVIew;
 			towerLayerMediator.contextView = nativeVIew;
+			enemyLayerMediator.contextView = nativeVIew;
 			ammosLayerMediator.contextView = nativeVIew;
 		}
 	}

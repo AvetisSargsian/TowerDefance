@@ -7,7 +7,6 @@ package game.bullets.view.mediator
 	import mvc.factory.IFactory;
 	import mvc.mediator.AbstractMediator;
 	import mvc.model.IModel;
-	import mvc.view.AbstractView;
 	
 	import starling.events.Event;
 	
@@ -34,9 +33,11 @@ package game.bullets.view.mediator
 			ammoM.removeEventListener(AmmunitionModel.NEW_BULLET,onNewBulletShooted);
 			ammoM.dispose();
 			ammoM = null;
+			
 			ammoC.stopJuggling();
 			ammoC.dispose();
 			ammoC = null;
+			
 			bulletFactory = null;
 			
 			super.dispose();

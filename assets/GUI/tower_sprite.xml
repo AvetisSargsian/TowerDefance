@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="tower_sprite.png">
+	<SubTexture name="100x100"	x="0"	y="602"	width="100"	height="100" frameX="-0" frameY="-0" frameWidth="100" frameHeight="100"/>
+	<SubTexture name="200x200"	x="0"	y="401"	width="200"	height="200" frameX="-0" frameY="-0" frameWidth="200" frameHeight="200"/>
+	<SubTexture name="400x400"	x="0"	y="0"	width="400"	height="400" frameX="-0" frameY="-0" frameWidth="400" frameHeight="400"/>
+	<SubTexture name="50x50"	x="0"	y="858"	width="50"	height="50" frameX="-0" frameY="-0" frameWidth="50" frameHeight="50"/>
+	<SubTexture name="Archer_Tower"	x="0"	y="703"	width="70"	height="93" frameX="-0" frameY="-0" frameWidth="70" frameHeight="94"/>
+	<SubTexture name="Water_Tower"	x="0"	y="797"	width="60"	height="60" frameX="-7" frameY="-2" frameWidth="75" frameHeight="68"/>
+</TextureAtlas>

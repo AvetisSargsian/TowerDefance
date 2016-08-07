@@ -9,9 +9,6 @@ package game.controller
 	public class GameController extends AbstractController
 	{
 		private static var _instance:GameController;
-		private var _gameModel:GameModel;
-		
-		
 		public static function get instance( ):GameController
 		{
 			if (_instance == null)
@@ -21,27 +18,34 @@ package game.controller
 			return _instance;
 		}
 		
+		private var gameModel:GameModel;
+		
 		public function GameController(pvt:PrivateClass)
 		{
 			super();
-			_gameModel = GameModel.instance;
+			gameModel = GameModel.instance;
 		}
 		
 		public function initGameModels(data:Object):void
 		{
-			_gameModel.reciveGameData(data);
-			MapModel.instance.setUpRoads(_gameModel.gameData.wayPointDo);
-			EnemysModel.instance.provideWaveData(_gameModel.gameData.wavesDo);
-			EnemysModel.instance.initialize(MapModel.instance.roads[0]);
-			
+			gameModel.reciveGameData(data);
+			MapModel.instance.setUpRoads(gameModel.gameData.wayPointDo);
+			EnemysModel.instance.provideWaveData(gameModel.gameData.wavesDo);
+			EnemysModel.instance.initialize(MapModel.instance.roads[0]);			
+		}
+		
+		public function handleGamePouse():void
+		{
+			if (gameModel.isPoused())
+				gameModel.continueGame();
+			else
+				gameModel.pouseGame();
 		}
 		
 		override public function dispose():void
 		{
-			
-			super.dispose();
+			gameModel = null;
 		}
-		
 	}
 }
 class PrivateClass

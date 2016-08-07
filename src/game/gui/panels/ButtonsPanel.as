@@ -26,7 +26,7 @@ package game.gui.panels
 			
 			var pouseGameBtn:Button = new Button(AssetsModel.drawRoundRectTexture(100,50,Color.BLUE),"POUSE");
 			pouseGameBtn.name = POUSE_BUTTON;
-			pouseGameBtn.x = newWaveBtn.x + newWaveBtn.width + 15;
+			pouseGameBtn.x = newWaveBtn.x + 100 + 15;
 			addChild(pouseGameBtn);
 		}
 	}

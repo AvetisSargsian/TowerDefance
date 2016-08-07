@@ -1,6 +1,7 @@
 package game.models
 {
 	import flash.net.SharedObject;
+	import flash.utils.getTimer;
 	
 	import game.map.objects.GeneralInfoDO;
 	import game.map.objects.PersedGameData;
@@ -41,19 +42,14 @@ package game.models
 				generalInfo:GeneralInfoDO = new GeneralInfoDO(),
 				wayPoints:WayPoinsDO = new WayPoinsDO(),
 				waves:WavesDO = new WavesDO();
-				
-
 			parseData([generalInfo, wayPoints, waves],parsedObj);
 			parsedData.generalInfo = generalInfo;
 			parsedData.wayPointDo = wayPoints; 
 			parsedData.wavesDo = waves;
 			
-			
-//			var parsedObj:Object = new Object();
-//			parsedObj[SERVICE_GENERAL_INFO] = generalInfo;
-//			parsedObj[SERVICE_WAY_POINTS] = wayPoints; 
-//			parsedObj[SERVICE_WAVES] = waves;
-//			dispatchEventWith(SERVICE_DATA_PARSING_COMPLETE,false,parsedObj);
+//			var startTime:Number = getTimer();
+//			var took:Number = getTimer() - startTime
+//			trace("Time measure", took,"milliseconds");
 			
 			return parsedData; 
 		}
