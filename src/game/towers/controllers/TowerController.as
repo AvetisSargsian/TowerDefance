@@ -137,8 +137,7 @@ package game.towers.controllers
 		{
 			for (var i:int = 0, len:int = model.towersCount(); i < len; ++i) 
 			{
-				var tower:TowerModel = model.getTowerByIndex(i);
-				tower.updateForShoot();
+				model.getTowerByIndex(i).updateForShoot();
 			}
 		}
 		
