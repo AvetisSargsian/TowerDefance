@@ -28,12 +28,15 @@ package game.bullets.models
 		{
 			super();
 			
-			_position = startPoint;
+			_destination = new Point();
+			_destVector = new Point();
+			_position = new Point();
+			_position.setTo(startPoint.x,startPoint.y);
+			
 			_target = target;
 			_demage = demage;
 			
-			_destination = new Point();
-			_destVector = new Point();
+			
 		}
 		
 		public function get isReachedTarget():Boolean
