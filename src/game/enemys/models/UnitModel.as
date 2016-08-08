@@ -130,9 +130,12 @@ package game.enemys.models
 		{
 			if (_destination) 
 			{
-				var	curentDist:Number = Point.distance(_destination,_position),
-					dX:Number =  _speed * Math.cos(_rotataionAngle),
-					dY:Number =  _speed * Math.sin(_rotataionAngle);
+				var dX:Number = (_destination.x - _position.x),
+					dY:Number = (_destination.y - _position.y),
+					curentDist:Number = Math.sqrt((dX*dX)+(dY*dY));
+				
+					dX = _speed * Math.cos(_rotataionAngle),
+					dY = _speed * Math.sin(_rotataionAngle);
 				
 				if ( curentDist <= _speed )
 				{
