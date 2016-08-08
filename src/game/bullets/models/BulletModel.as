@@ -10,7 +10,7 @@ package game.bullets.models
 	public class BulletModel extends AbstractModel
 	{
 		public static const BULET_UPDATE:String = "buletUpdae";
-		public static const DISPOSED:String = "disposed";
+		public static const REACHED_TARGET:String = "reachedTarget";
 		
 		private var _bounds:Rectangle;
 		private var _position:Point;
@@ -22,8 +22,7 @@ package game.bullets.models
 		private var _destination:Point;
 		private var _destVector:Point;
 		private var	_rotataionAngle:Number;
-		private var _isDisposed:Boolean = false;
-		
+		private var _isReachedTarget:Boolean = false;
 		
 		public function BulletModel(startPoint:Point,target:UnitModel,demage:Number)
 		{
@@ -37,9 +36,9 @@ package game.bullets.models
 			_destVector = new Point();
 		}
 		
-		public function get isDisposed():Boolean
+		public function get isReachedTarget():Boolean
 		{
-			return _isDisposed;
+			return _isReachedTarget;
 		}
 
 		public function get isOnStage():Boolean
@@ -97,11 +96,9 @@ package game.bullets.models
 		
 		override public function dispose():void
 		{
-			_isDisposed =  true;
 			_bounds = null;
 			_position = null;
 			_target = null;
-			invokeCallBacks(DISPOSED);
 			super.dispose();
 		}
 		
@@ -113,15 +110,18 @@ package game.bullets.models
 				_destVector = _destination.subtract(_position);
 				_rotataionAngle = Math.atan2(_destVector.y,_destVector.x);
 				
-				var	curentDist:Number = Point.distance(_destination,_position),
-					dX:Number =  _speed * Math.cos(_rotataionAngle),
-					dY:Number =  _speed * Math.sin(_rotataionAngle);
+				var dX:Number = (_destination.x - _position.x),
+					dY:Number = (_destination.y - _position.y),
+					curentDist:Number = Math.sqrt((dX*dX)+(dY*dY));
+				dX = _speed * Math.cos(_rotataionAngle);
+				dY = _speed * Math.sin(_rotataionAngle);
 				
 				if ( curentDist <= _speed )
 				{
 					_position.setTo(_destination.x, _destination.y);
 					_target.takeDamadge(_demage);
-					dispose();
+					_isReachedTarget = true;
+					invokeCallBacks(REACHED_TARGET);
 				}
 				else
 				{
@@ -130,7 +130,8 @@ package game.bullets.models
 				}
 			}else
 			{
-				dispose();
+				_isReachedTarget = true;
+				invokeCallBacks(REACHED_TARGET);
 			}
 		}
 	}
