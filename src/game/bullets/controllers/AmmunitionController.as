@@ -57,7 +57,7 @@ package game.bullets.controllers
 					if (bullet.isReachedTarget)
 					{
 						ammoM.removeBulletByIndex(i);
-						ammoM.saveBullet(bullet);
+//						ammoM.saveBullet(bullet);
 					}else
 					{
 						bullet.update();

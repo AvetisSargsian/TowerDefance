@@ -28,22 +28,27 @@ package game.towers.controllers
 		
 		private var towerHolderModel:TowersHolderModel;
 		
+		private var tempPoint:Point;
+		private var tempPoint1:Point;
+		private var pointA:Point;
+		private var	pointB:Point;
+		private var	pointC:Point;
+		
 		public function TowerController(pvt:PrivateClass)
 		{
 			super();
 			towerHolderModel = TowersHolderModel.instance;
+			
+			tempPoint = new Point();
+			tempPoint1 = new Point();			
+			pointA = new Point();
+			pointB = new Point();
+			pointC = new Point();
 		}
 		
 		public override function advanceTime(time:Number):void
 		{
 			updateTowers();
-		}
-		
-		public function updateTowers():void
-		{
-			var eModel:EnemysModel = EnemysModel.instance;
-			setTargets(towerHolderModel,eModel);
-			update(towerHolderModel);
 		}
 		
 		public function handlePanelTouch(touch:Touch):void
@@ -52,8 +57,6 @@ package game.towers.controllers
 			{
 				var x:Number = touch.globalX,
 					y:Number = touch.globalY;
-				var bottom:Number = touch.target.bounds.bottom;
-				var top:Number = touch.target.bounds.top;
 				towerHolderModel.towerProjection.setNewPos(x, y, calculateDistance(x, y), distanseFromNeibors(x,y));
 			}
 			else if (touch.phase == TouchPhase.BEGAN)
@@ -66,14 +69,23 @@ package game.towers.controllers
 			}
 		}
 		
+		private function updateTowers():void
+		{
+			var eModel:EnemysModel = EnemysModel.instance;
+			setTargets(towerHolderModel,eModel);
+			update(towerHolderModel);
+		}
+		
 		private function distanseFromNeibors(x:Number, y:Number):Number
 		{
-			var dist:Number = Number.MAX_VALUE,
-				p:Point = new Point(x,y);
+			var dist:Number = Number.MAX_VALUE;
+			tempPoint.setTo(x,y);
 			for (var i:int = 0, len:int = towerHolderModel.towersCount(); i < len; ++i) 
 			{
 				var tower:TowerModel = towerHolderModel.getTowerByIndex(i),
-					temp:Number = Point.distance(p,tower.positionPoint);
+					dx:Number = (tempPoint.x - tower.positionPoint.x),
+					dy:Number = (tempPoint.y - tower.positionPoint.y),
+					temp:Number = Math.sqrt((dx*dx)+(dy*dy));
 				if (temp < dist)
 					dist = temp;
 			}
@@ -82,10 +94,9 @@ package game.towers.controllers
 		
 		private function calculateDistance(x:Number,y:Number):Number
 		{
-			var pointA:Point = new Point(),
-				pointB:Point = new Point(),
-				pointC:Point = new Point(x,y),
-				road:Road,
+			pointC.setTo(x,y);
+				
+			var road:Road,
 				distance:Number = Number.MAX_VALUE,
 				mapModel:MapModel = MapModel.instance;
 				
@@ -102,8 +113,7 @@ package game.towers.controllers
 						pointA.setTo(wayPoint.x, wayPoint.y);
 						pointB.setTo(wayPoint1.x, wayPoint1.y);
 						
-						var tempProectionPoint:Point = findeProectionPoint(pointA,pointB,pointC),
-							tempDist:Number = Point.distance(pointC,tempProectionPoint);
+						var tempDist:Number = Point.distance(pointC,findeProectionPoint(pointA,pointB,pointC));
 						if(tempDist < distance)
 						{
 							distance = tempDist;
@@ -115,22 +125,22 @@ package game.towers.controllers
 		}
 		
 		private function findeProectionPoint(pointA:Point, pointB:Point, pointC:Point):Point
-		{
-			var abVec:Point = new Point(pointB.x - pointA.x, pointB.y - pointA.y),
-				acVec:Point = new Point(pointC.x - pointA.x, pointC.y - pointA.y),
-				squaredLengthAB:Number = abVec.x * abVec.x + abVec.y * abVec.y,
-				scale_AC_AB:Number = (acVec.x * abVec.x + acVec.y * abVec.y) / squaredLengthAB;
+		{	
+			tempPoint.setTo(pointB.x - pointA.x, pointB.y - pointA.y);
+			tempPoint1.setTo(pointC.x - pointA.x, pointC.y - pointA.y);
+				
+			var squaredLengthAB:Number = tempPoint.x * tempPoint.x + tempPoint.y * tempPoint.y,
+				scale_AC_AB:Number = (tempPoint1.x * tempPoint.x + tempPoint1.y * tempPoint.y) / squaredLengthAB;
 			
 			if (scale_AC_AB > 1)
 				scale_AC_AB = 1;
 			else if (scale_AC_AB < 0)
 				scale_AC_AB = 0;
 			
-			var x:Number = pointA.x + scale_AC_AB * abVec.x,
-				y:Number = pointA.y + scale_AC_AB * abVec.y,
-				pointOnVector:Point = new Point(x,y);
-			
-			return pointOnVector;  
+			var x:Number = pointA.x + scale_AC_AB * tempPoint.x,
+				y:Number = pointA.y + scale_AC_AB * tempPoint.y;
+			tempPoint.setTo(x,y);
+			return tempPoint;
 		}
 		
 		private function update(model:TowersHolderModel):void
@@ -157,6 +167,11 @@ package game.towers.controllers
 		override public function dispose():void
 		{
 			towerHolderModel = null;
+			tempPoint = null;
+			tempPoint1 = null;			
+			pointA = null;
+			pointB = null;
+			pointC = null;
 		}
 	}
 }
