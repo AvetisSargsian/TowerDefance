@@ -88,14 +88,14 @@ package game.towers.models
 		public function addTarget(enemy:UnitModel):void
 		{
 			if (enemy && isInRange(enemy))
-			{
 				_enemysInRange.push(enemy);
-			}
 		}
 		
 		public function isInRange(enemy:UnitModel):Boolean
 		{
-			var dist:Number = Point.distance(_position, new Point(enemy.x,enemy.y));
+			var dx:Number = (enemy.x - _position.x),
+				dy:Number = (enemy.y - _position.y),
+				dist:Number = Math.sqrt((dx*dx)+(dy*dy));
 			return dist <= _shootRange;
 		}
 		
@@ -103,10 +103,12 @@ package game.towers.models
 		{
 			if(++_curentReloadTime >= _reloadTime)
 			{ 
-				_curentReloadTime = 0;
 				_curentEnemy = _towerFightStrategy.findEnemy(this,_enemysInRange);
 				if (_curentEnemy)
+				{
 					shoot(_curentEnemy);
+					_curentReloadTime = 0;
+				}
 			}
 		}
 		
