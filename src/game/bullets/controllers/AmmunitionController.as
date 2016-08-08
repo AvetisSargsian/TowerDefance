@@ -4,7 +4,6 @@ package game.bullets.controllers
 	
 	import game.bullets.models.AmmunitionModel;
 	import game.bullets.models.BulletModel;
-	import game.enemys.models.UnitModel;
 	import game.towers.models.TowerModel;
 	
 	import mvc.controller.AbstractController;
@@ -12,14 +11,13 @@ package game.bullets.controllers
 	public class AmmunitionController extends AbstractController
 	{
 		private var ammoM:AmmunitionModel;
+		private var shooterPos:Point;
 		private static var _instance:AmmunitionController;
 		
 		public static function get instance( ):AmmunitionController
 		{
 			if (_instance == null)
-			{
 				_instance = new AmmunitionController (new PrivateClass());		
-			}
 			return _instance;
 		}
 		
@@ -28,12 +26,13 @@ package game.bullets.controllers
 			super();
 			
 			ammoM = AmmunitionModel.instance;
+			shooterPos = new Point();
 		}
 		
 		public function createBullet(shooter:TowerModel):void
 		{
-			var shootPos:Point = new Point(shooter.x,shooter.y);
-			ammoM.addBullet(new BulletModel(shootPos, shooter.curentEnemy, shooter.damage));
+			shooterPos.setTo(shooter.x,shooter.y);
+			ammoM.addBullet(new BulletModel(shooterPos, shooter.curentEnemy, shooter.damage));
 		}
 		
 		public override function advanceTime(time:Number):void
@@ -43,6 +42,7 @@ package game.bullets.controllers
 		
 		public override function dispose():void
 		{
+			shooterPos = null;
 			stopJuggling();
 			ammoM = null;
 		}
@@ -54,9 +54,10 @@ package game.bullets.controllers
 				var bullet:BulletModel = ammoM.getBulletByIndex(i);
 				if (bullet)
 				{
-					if (bullet.isDisposed)
+					if (bullet.isReachedTarget)
 					{
 						ammoM.removeBulletByIndex(i);
+						ammoM.saveBullet(bullet);
 					}else
 					{
 						bullet.update();
