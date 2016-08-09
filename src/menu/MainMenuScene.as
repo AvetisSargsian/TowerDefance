@@ -1,17 +1,12 @@
 package menu
 {
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-	
 	import loading.model.AssetsModel;
 	
-	import navigation.controller.NavigationController;
+	import mvc.view.Scene;
 	
 	import starling.display.Button;
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.utils.Color;
-	import mvc.view.Scene;
 	
 	public class MainMenuScene extends Scene
 	{

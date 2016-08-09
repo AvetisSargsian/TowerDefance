@@ -2,8 +2,6 @@ package selectmap.scene
 {
 	import mvc.view.Scene;
 	
-	import navigation.controller.NavigationController;
-	
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.textures.TextureSmoothing;

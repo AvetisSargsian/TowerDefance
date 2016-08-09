@@ -54,7 +54,6 @@ package navigation.model
 			if (_curentMediator)
 			{
 				_curentMediator.dispose();
-				_canvas.removeChild(_curentMediator.nativeVIew,true);
 			}
 			
 			_curentMediator = value;
