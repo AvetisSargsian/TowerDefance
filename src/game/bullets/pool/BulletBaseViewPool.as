@@ -3,9 +3,9 @@ package game.bullets.pool
 	import game.bullets.view.BulletBaseView;
 	
 	import mvc.view.AbstractView;
-	import mvc.pool.AbstractViewPool;
+	import mvc.pool.AbstractViewAbstractPool;
 
-	public class BulletBaseViewPool extends AbstractViewPool
+	public class BulletBaseViewPool extends AbstractViewAbstractPool
 	{
 		private static var _instance:BulletBaseViewPool;
 		public static function get instance():BulletBaseViewPool

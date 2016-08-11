@@ -49,7 +49,7 @@ package game.bullets.controllers
 		
 		private function updateBullets():void
 		{
-			for (var i:int = 0,len:int = ammoM.bulletCount(); i < len; ++i) 
+			for (var i:int = ammoM.bulletCount()-1; i >= 0; --i)
 			{
 				var bullet:BulletModel = ammoM.getBulletByIndex(i);
 				if (bullet)

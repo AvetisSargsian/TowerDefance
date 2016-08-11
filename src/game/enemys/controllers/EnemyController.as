@@ -61,7 +61,7 @@ package game.enemys.controllers
 		
 		private function updateUnits():void
 		{ 
-			for (var i:int = 0,len:int = enemysM.enemyCount(); i < len; ++i) 
+			for (var i:int = enemysM.enemyCount()-1; i > -1; --i)
 			{
 				var unit:UnitModel = enemysM.getEnemyByIndex(i);
 				if (unit && unit.isOnStage)
@@ -83,7 +83,7 @@ package game.enemys.controllers
 					}
 				}
 			}
-			if (len == 0)
+			if (enemysM.enemyCount() == 0)
 			{
 				startNewWave();
 			}
