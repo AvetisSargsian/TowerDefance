@@ -89,7 +89,7 @@ package game.bullets.models
 			return _position.y;
 		}
 		
-		public function update():void
+		public override function update():void
 		{
 			if (_isOnStage)
 			{

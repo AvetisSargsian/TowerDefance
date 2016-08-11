@@ -31,7 +31,7 @@ package game.bullets.controllers
 		
 		public function createBullet(shooter:TowerModel):void
 		{
-			shooterPos.setTo(shooter.x,shooter.y);
+			shooterPos.setTo(shooter.x,shooter.y - 40);
 			ammoM.addBullet(new BulletModel(shooterPos, shooter.curentEnemy, shooter.damage));
 		}
 		

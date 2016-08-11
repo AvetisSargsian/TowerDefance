@@ -45,7 +45,7 @@ package game.enemys.controllers
 		
 		public function resetEnemyModel():void
 		{
-			enemysM.reset();
+			enemysM.flushCallBacks();
 		}
 		
 		public override function advanceTime(time:Number):void

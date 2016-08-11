@@ -23,6 +23,7 @@ package game.scene
 		private function onAdded():void
 		{
 			var bg:Image = new Image(assetManager.getTexture(mapModel.mapName));
+			bg.touchable = false;
 			addChild(bg);
 			mapModel = null;
 			

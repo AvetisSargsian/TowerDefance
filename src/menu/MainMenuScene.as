@@ -18,8 +18,11 @@ package menu
 		
 		private function onAdded():void
 		{
-			var q:Quad = new Quad(Constants.STAGE_WIDTH,Constants.STAGE_HEIGHT,0xf0af88);
-			addChild(q);
+//			stage.color = 0xf0af88;
+			var bg_q:Quad = new Quad(Constants.STAGE_WIDTH,Constants.STAGE_HEIGHT,0xf0af88);
+			bg_q.touchable = false;
+			addChild(bg_q);
+			
 			
 			var btn:Button;
 			btn = new Button(AssetsModel.drawRoundRectTexture(200,100,Color.YELLOW),"PLAY GAME");
