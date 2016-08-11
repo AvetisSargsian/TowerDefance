@@ -1,4 +1,4 @@
- package game.towers.views
+ package game.gui.panels
 {
 	import game.towers.models.TowersHolderModel;
 	

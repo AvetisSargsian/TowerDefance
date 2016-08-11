@@ -1,11 +1,13 @@
 package game.gui
 {
+	import game.enemys.controllers.EnemyController;
 	import game.gui.panels.ButtonsPanelMediator;
-	import game.towers.views.mediator.TowersPanelMediator;
+	import game.gui.panels.TowersPanelMediator;
 	
 	import mvc.mediator.AbstractMediator;
 	import mvc.view.AbstractView;
 	
+	import starling.display.Button;
 	import starling.events.Event;
 	
 	public class UserInterfaceMediator extends AbstractMediator
@@ -31,6 +33,10 @@ package game.gui
 			var towerP:AbstractView = nativeVIew.getChildByName(UserInterface.TOWERS_PANEL) as AbstractView;
 			towerPanelMediator = new TowersPanelMediator(towerP);
 			towerPanelMediator.contextView = nativeVIew;
+			
+			///temp code, refactor after in separate panel and Mediator
+			var lunchBtn:Button = nativeVIew.getChildByName(UserInterface.ENEMYS_LUNCH_BTN) as Button;
+			lunchBtn.addEventListener(Event.TRIGGERED,startEnemysWaves);
 		}
 		
 		override public function dispose():void
@@ -48,5 +54,15 @@ package game.gui
 		{
 			return new UserInterface();
 		}
+		
+		
+		private function startEnemysWaves(event:Event):void
+		{
+			var lunchBtn:Button = event.target as Button;
+			lunchBtn.removeEventListener(Event.TRIGGERED,startEnemysWaves);
+			lunchBtn.visible = false;
+			EnemyController.instance.lunchEnemys();
+		}
+		
 	}
 }

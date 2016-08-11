@@ -1,7 +1,6 @@
-package game.towers.views.mediator
+package game.gui.panels
 {
 	import game.towers.controllers.TowerController;
-	import game.towers.views.TowersPanel;
 	
 	import mvc.mediator.AbstractMediator;
 	import mvc.view.AbstractView;
