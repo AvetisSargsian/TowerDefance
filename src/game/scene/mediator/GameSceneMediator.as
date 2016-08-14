@@ -84,10 +84,10 @@ package game.scene.mediator
 		
 		private function onAdded():void
 		{
-			UIMediator.contextView = nativeVIew;
-			towerLayerMediator.contextView = nativeVIew;
-			enemyLayerMediator.contextView = nativeVIew;
-			ammosLayerMediator.contextView = nativeVIew;
+			UIMediator.addToParent(nativeVIew);
+			towerLayerMediator.addToParent(nativeVIew);
+			enemyLayerMediator.addToParent(nativeVIew);
+			ammosLayerMediator.addToParent(nativeVIew);
 		}
 	}
 }

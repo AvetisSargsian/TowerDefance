@@ -56,8 +56,8 @@ package navigation.model
 				_curentMediator.dispose();
 			}
 			
-			_curentMediator = value;
-			_curentMediator.contextView = _canvas; 
+			_curentMediator = value; 
+			_curentMediator.addToParent( _canvas);
 		}
 	}
 }

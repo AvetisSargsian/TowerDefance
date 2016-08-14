@@ -60,7 +60,6 @@ package
 				function(event:Object, app:StarlingRootDisplayObject):void
 				{	
 					myStarling.removeEventListener(starling.events.Event.ROOT_CREATED, arguments.callee);
-					stage.color = 0x000000;
 					myStarling.start();
 					
 					trace("Starling stage size",myStarling.stage.stageWidth,myStarling.stage.stageHeight)

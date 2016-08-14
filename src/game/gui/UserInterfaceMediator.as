@@ -28,11 +28,9 @@ package game.gui
 			
 			var btnPan:AbstractView = nativeVIew.getChildByName(UserInterface.BUTTONS_PANEL) as AbstractView; 
 			buttonsPanelMediator = new ButtonsPanelMediator(btnPan);
-			buttonsPanelMediator.contextView = nativeVIew;
 			
 			var towerP:AbstractView = nativeVIew.getChildByName(UserInterface.TOWERS_PANEL) as AbstractView;
 			towerPanelMediator = new TowersPanelMediator(towerP);
-			towerPanelMediator.contextView = nativeVIew;
 			
 			///temp code, refactor after in separate panel and Mediator
 			var lunchBtn:Button = nativeVIew.getChildByName(UserInterface.ENEMYS_LUNCH_BTN) as Button;
