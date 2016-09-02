@@ -18,8 +18,6 @@ package game.enemys.view.mediator
 		{
 			super();
 			
-			nativeVIew.addEventListener(Event.ADDED_TO_STAGE,onAddedTostege);
-			
 			waveBuilderDirector = new WaveBuilderDirector(nativeVIew);
 			unitsCont = EnemyController.instance;
 			enemyM = EnemysModel.instance;
@@ -43,12 +41,6 @@ package game.enemys.view.mediator
 			waveBuilderDirector = null;
 				
 			super.dispose();
-		}
-		
-		private function onAddedTostege(event:Event):void
-		{
-			nativeVIew.removeEventListener(Event.ADDED_TO_STAGE,onAddedTostege);
-			unitsCont.lunchEnemys();
 		}
 		
 		private function onNewWaveAdded(event:Event):void

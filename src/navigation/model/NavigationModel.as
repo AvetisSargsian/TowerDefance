@@ -54,11 +54,10 @@ package navigation.model
 			if (_curentMediator)
 			{
 				_curentMediator.dispose();
-				_canvas.removeChild(_curentMediator.nativeVIew,true);
 			}
 			
-			_curentMediator = value;
-			_curentMediator.contextView = _canvas; 
+			_curentMediator = value; 
+			_curentMediator.addToParent( _canvas);
 		}
 	}
 }

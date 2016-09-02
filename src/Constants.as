@@ -9,7 +9,6 @@ package
 	import menu.MainMenuScene;
 	import menu.mediator.MainMenuSceneMediator;
 	
-	import selectmap.scene.SelectMapScene;
 	import selectmap.scene.mediator.SelectMapSceneMediator;
 
 	public class Constants 

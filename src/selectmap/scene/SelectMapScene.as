@@ -2,8 +2,6 @@ package selectmap.scene
 {
 	import mvc.view.Scene;
 	
-	import navigation.controller.NavigationController;
-	
 	import starling.display.Image;
 	import starling.display.Quad;
 	import starling.textures.TextureSmoothing;
@@ -20,6 +18,7 @@ package selectmap.scene
 		private function onAdded():void
 		{	
 			var bgQuad:Quad = new Quad(Constants.STAGE_WIDTH,Constants.STAGE_HEIGHT,Color.OLIVE);
+			bgQuad.touchable = false;
 			addChild(bgQuad);
 			
 			//TODO:move icons name to json file,and build scene from that document
@@ -36,8 +35,7 @@ package selectmap.scene
 			
 			for (var i:int = 0,l:int = iconsVec.length; i < l; ++i)
 			{
-				img = new Image(assetManager.getTexture(iconsVec[i]));
-				img.smoothing = TextureSmoothing.BILINEAR;				
+				img = new Image(assetManager.getTexture(iconsVec[i]));				
 				img.mask = roundRect;				
 				
 				if (count/4 == 1)

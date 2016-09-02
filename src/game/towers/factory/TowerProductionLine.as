@@ -24,8 +24,8 @@ package game.towers.factory
 		}
 		
 		public function start():void
-		{
-			towerBaseViewMediator.contextView = canvas as AbstractView; 
+		{ 
+			towerBaseViewMediator.addToParent(canvas as AbstractView);
 			dispose();
 		}
 		

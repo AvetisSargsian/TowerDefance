@@ -5,6 +5,7 @@ package game.enemys.builder.factory.products
 	import game.map.objects.Wave;
 	
 	import mvc.factory.IContentProduct;
+	import game.enemys.pool.UnitBaseViewPool;
 	
 	public class EnemysViewProduct implements IContentProduct
 	{
@@ -34,7 +35,9 @@ package game.enemys.builder.factory.products
 			var enemysModels:Vector.<UnitModel> = _wave.enemys;
 			for (var i:int = 0, len:int = enemysModels.length; i < len ; ++i) 
 			{
-				_content.push(new UnitBaseView(enemysModels[i]));
+				var unit:UnitBaseView = UnitBaseViewPool.instance.take() as UnitBaseView;
+				unit.assignModel(enemysModels[i]);
+				_content.push(unit);
 			}
 		}
 	}

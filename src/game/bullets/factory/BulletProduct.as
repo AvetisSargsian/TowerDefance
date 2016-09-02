@@ -2,7 +2,9 @@ package game.bullets.factory
 {
 	import game.bullets.models.BulletModel;
 	import game.bullets.view.BulletBaseView;
+	
 	import mvc.factory.IStartProduct;
+	import game.bullets.pool.BulletBaseViewPool;
 	
 	import starling.display.DisplayObjectContainer;
 	
@@ -10,7 +12,9 @@ package game.bullets.factory
 	{
 		public function BulletProduct(canvas:DisplayObjectContainer,model:BulletModel)
 		{
-			canvas.addChild(new BulletBaseView(model));
+			var bullet:BulletBaseView = BulletBaseViewPool.instance.take() as BulletBaseView;
+			bullet.assignModel(model);
+			canvas.addChild(bullet);
 		}
 		
 		public function start():void

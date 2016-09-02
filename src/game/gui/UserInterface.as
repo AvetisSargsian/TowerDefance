@@ -1,14 +1,17 @@
 package game.gui
 {
 	import game.gui.panels.ButtonsPanel;
-	import game.towers.views.TowersPanel;
+	import game.gui.panels.TowersPanel;
 	
 	import mvc.view.AbstractView;
+	
+	import starling.display.Button;
 	
 	public class UserInterface extends AbstractView
 	{
 		public static const BUTTONS_PANEL:String = "buttonsPanel";
 		public static const TOWERS_PANEL:String = "towersPanel";
+		public static const ENEMYS_LUNCH_BTN:String = "lunchBtn";
 		
 		public function UserInterface()
 		{
@@ -28,6 +31,13 @@ package game.gui
 			towersPanel.name = TOWERS_PANEL;
 			addChild(towersPanel);
 			towersPanel.x = Constants.STAGE_WIDTH - towersPanel.width - 10;
+			
+			var lunchBtn:Button = new Button(assetManager.getTexture("nextWaveBtn_l"));
+			lunchBtn.name = ENEMYS_LUNCH_BTN;
+			lunchBtn.x = 32;
+			lunchBtn.y = 350;
+			lunchBtn.alignPivot();
+			addChild(lunchBtn);
 		}
 	}
 }

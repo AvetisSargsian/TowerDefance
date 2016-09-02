@@ -13,6 +13,7 @@ package
 	import starling.core.Starling;
 	import starling.events.Event;
 	
+	[SWF(backgroundColor="#000")]
 	public class TowerDefance extends Sprite
 	{
 		private var myStarling:Starling;
@@ -22,7 +23,6 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			stage.frameRate = 60;
-			stage.color = 0x000000;
 			
 			var iOS:Boolean = Capabilities.manufacturer.indexOf("iOS") != -1;
 			Starling.multitouchEnabled = true;
@@ -37,7 +37,7 @@ package
 			NativeApplication.nativeApplication.addEventListener(
 				flash.events.Event.DEACTIVATE, function (e:*):void { myStarling.stop() });
 			
-			NativeApplication.nativeApplication.addEventListener(flash.events.Event.EXITING, function (e:*):void{});
+//			NativeApplication.nativeApplication.addEventListener(flash.events.Event.EXITING, function (e:*):void{});
 		}
 		
 		private function init(event:flash.events.Event = null):void
@@ -60,7 +60,6 @@ package
 				function(event:Object, app:StarlingRootDisplayObject):void
 				{	
 					myStarling.removeEventListener(starling.events.Event.ROOT_CREATED, arguments.callee);
-					stage.color = 0x000000;
 					myStarling.start();
 					
 					trace("Starling stage size",myStarling.stage.stageWidth,myStarling.stage.stageHeight)

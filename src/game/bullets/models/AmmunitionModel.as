@@ -12,9 +12,7 @@ package game.bullets.models
 		public static function get instance():AmmunitionModel
 		{
 			if (_instance == null)
-			{
 				_instance = new AmmunitionModel (new PrivateClass());		
-			}
 			return _instance;
 		}
 		
@@ -64,12 +62,13 @@ package game.bullets.models
 			super.dispose();
 		}
 		
+		public function saveBullet(bullet:BulletModel):void
+		{
+			
+		}
 	}
 }
 class PrivateClass
 {
-	public function PrivateClass( ) 
-	{
-		
-	}
+	public function PrivateClass( ){}
 }

@@ -1,17 +1,12 @@
 package menu
 {
-	import flash.utils.getDefinitionByName;
-	import flash.utils.getQualifiedClassName;
-	
 	import loading.model.AssetsModel;
 	
-	import navigation.controller.NavigationController;
+	import mvc.view.Scene;
 	
 	import starling.display.Button;
 	import starling.display.Quad;
-	import starling.events.Event;
 	import starling.utils.Color;
-	import mvc.view.Scene;
 	
 	public class MainMenuScene extends Scene
 	{
@@ -23,8 +18,11 @@ package menu
 		
 		private function onAdded():void
 		{
-			var q:Quad = new Quad(Constants.STAGE_WIDTH,Constants.STAGE_HEIGHT,0xf0af88);
-			addChild(q);
+//			stage.color = 0xf0af88;
+			var bg_q:Quad = new Quad(Constants.STAGE_WIDTH,Constants.STAGE_HEIGHT,0xf0af88);
+			bg_q.touchable = false;
+			addChild(bg_q);
+			
 			
 			var btn:Button;
 			btn = new Button(AssetsModel.drawRoundRectTexture(200,100,Color.YELLOW),"PLAY GAME");

@@ -44,11 +44,8 @@ package game.towers.views.mediator
 			model.removeCallBack(TowerModel.BUILDED,onTowerBuild);
 			model.removeCallBack(TowerModel.SHOOTING,towerShoot);
 			model = null;
-			
 			circuleImg = null;
-			
 			nativeVIew.removeEventListener(TouchEvent.TOUCH,onTouch);
-			
 			super.dispose();
 		}
 		
@@ -91,7 +88,7 @@ package game.towers.views.mediator
 		
 		private function onModelDisposed():void
 		{
-			nativeVIew.removeFromParent(true);
+//			nativeVIew.removeFromParent(true);
 			dispose();
 		}
 	}

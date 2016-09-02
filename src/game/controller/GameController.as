@@ -1,11 +1,12 @@
 package game.controller
 {
+	import game.bullets.pool.BulletBaseViewPool;
 	import game.enemys.models.EnemysModel;
+	import game.enemys.pool.UnitBaseViewPool;
 	import game.map.models.MapModel;
 	import game.models.GameModel;
 	
 	import mvc.controller.AbstractController;
-	import mvc.pool.BulletBaseViewPool;
 	
 	public class GameController extends AbstractController
 	{
@@ -33,7 +34,8 @@ package game.controller
 			MapModel.instance.setUpRoads(gameModel.gameData.wayPointDo);
 			EnemysModel.instance.provideWaveData(gameModel.gameData.wavesDo);
 			EnemysModel.instance.initialize(MapModel.instance.roads[0]);	
-			BulletBaseViewPool.instance.fillUp([]);
+			BulletBaseViewPool.instance.fillUp(30);
+			UnitBaseViewPool.instance.fillUp(100);
 		}
 		
 		public function handleGamePouse():void

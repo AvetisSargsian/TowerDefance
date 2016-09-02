@@ -8,34 +8,26 @@ package game.enemys.view
 	
 	public class UnitBaseView extends AbstractView
 	{
-		protected var _unitModel:UnitModel
+		protected var unitModel:UnitModel
 		
-		public function UnitBaseView(model:UnitModel)
+		public function UnitBaseView(model:UnitModel = null)
 		{
 			super();
 			
 			this.onAddedToStage = onAdded;
 			this.onRemoveFromStage = onRemove;
 			
-			_unitModel = model;
-			_unitModel.registerCallBack(UnitModel.UPDATE,onModelUpdate);
-			_unitModel.registerCallBack(UnitModel.DISPOSED,onDispose);
+			assignModel(model);
 		}
 		
-		private function onAdded():void
+		public function assignModel(model:UnitModel):void
 		{
-			drawUnit();
-			onModelUpdate();
-			_unitModel.isOnStage = true;
-			_unitModel.bounds = this.bounds;
-		}
-		
-		private function onRemove():void
-		{
-			_unitModel.removeCallBack(UnitModel.UPDATE,onModelUpdate);
-			_unitModel.removeCallBack(UnitModel.DISPOSED,onDispose);
-			_unitModel.isOnStage = false;
-			_unitModel = null;
+			if (model)
+			{
+				unitModel = model;
+				unitModel.registerCallBack(UnitModel.UPDATE,onModelUpdate);
+				unitModel.registerCallBack(UnitModel.DISPOSED,onDispose);
+			}
 		}
 		
 		protected function drawUnit():void
@@ -48,15 +40,38 @@ package game.enemys.view
 		
 		protected function onDispose():void
 		{
-//			dispose();
-			removeFromParent(true);
+			removeFromParent();
 		}
 		
 		protected function onModelUpdate():void
 		{
-			this.x = _unitModel.x;
-			this.y = _unitModel.y;
-			this.rotation = _unitModel.rotataionAngle;
+			this.x = unitModel.x;
+			this.y = unitModel.y;
+			this.rotation = unitModel.rotataionAngle;
+		}
+		
+		private function removeModel():void
+		{
+			if(unitModel)
+			{
+				unitModel.removeCallBack(UnitModel.UPDATE,onModelUpdate);
+				unitModel.removeCallBack(UnitModel.DISPOSED,onDispose);
+				unitModel = null;
+			}
+		}
+		
+		private function onAdded():void
+		{
+			drawUnit();
+			onModelUpdate();
+			unitModel.isOnStage = true;
+//			unitModel.bounds = this.bounds;
+		}
+		
+		private function onRemove():void
+		{
+			unitModel.isOnStage = false;
+			removeModel();
 		}
 	}
 }
