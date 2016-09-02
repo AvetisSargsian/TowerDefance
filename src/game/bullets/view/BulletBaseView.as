@@ -5,38 +5,44 @@ package game.bullets.view
 	import mvc.view.AbstractView;
 	
 	import starling.display.Shape;
-	import starling.events.Event;
 	import starling.utils.Color;
 	
 	public class BulletBaseView extends AbstractView
 	{
-		private var _model:BulletModel;
+		private var model:BulletModel;
 		
 		public function BulletBaseView(model:BulletModel = null)
 		{
 			super();
 			
 			this.onAddedToStage = onAdded;
-			this.onRemoveFromStage = onRemove;
 			
-			_model = model;
-			_model.registerCallBack(BulletModel.BULET_UPDATE,onModelUpdate);
-			_model.registerCallBack(BulletModel.DISPOSED,onModelDispose);
+			assignModel(model);
+		}
+		
+		public function assignModel(model:BulletModel):void
+		{
+			if (model)
+			{
+				this.model = model;
+				this.model.registerCallBack(BulletModel.BULET_UPDATE,onModelUpdate);
+				this.model.registerCallBack(BulletModel.REACHED_TARGET,onReachedTarget);
+				onModelUpdate();
+			}
+		}
+		
+		override public function dispose():void
+		{
+			removeModel();
+			removeFromParent();
+			super.dispose();
 		}
 		
 		private function onAdded():void
 		{
 			drawBullet();
-			_model.isOnStage = true;
-			_model.bounds = this.bounds;
-		}
-		
-		private function onRemove():void
-		{
-			_model.removeCallBack(BulletModel.DISPOSED,onModelDispose);
-			_model.removeCallBack(BulletModel.BULET_UPDATE,onModelUpdate);
-			_model.isOnStage = false;
-			_model = null;
+			model.isOnStage = true;
+//			_model.bounds = this.bounds;
 		}
 		
 		protected  function drawBullet():void
@@ -50,17 +56,30 @@ package game.bullets.view
 		
 		protected function onModelUpdate():void
 		{
-			this.x = _model.x;
-			this.y = _model.y;
+			this.x = model.x;
+			this.y = model.y;
+			
 //			if (this.bounds.intersects(_model.target.bounds))
 //			{
 //				trace("BOOM!!!");
 //			}
 		}
 		
-		private function onModelDispose():void
+		private function onReachedTarget():void
 		{
-			removeFromParent(true);
+			model.isOnStage = false;
+			removeModel();
+			removeFromParent();
+		}
+		
+		private function removeModel():void
+		{
+			if (model)
+			{
+				model.removeCallBack(BulletModel.REACHED_TARGET,onReachedTarget);
+				model.removeCallBack(BulletModel.BULET_UPDATE,onModelUpdate);
+				model = null;
+			}
 		}
 	}
 }

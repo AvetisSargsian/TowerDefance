@@ -5,6 +5,7 @@ package game.controller
 	import game.models.GameModel;
 	
 	import mvc.controller.AbstractController;
+	import mvc.pool.BulletBaseViewPool;
 	
 	public class GameController extends AbstractController
 	{
@@ -31,7 +32,8 @@ package game.controller
 			gameModel.reciveGameData(data);
 			MapModel.instance.setUpRoads(gameModel.gameData.wayPointDo);
 			EnemysModel.instance.provideWaveData(gameModel.gameData.wavesDo);
-			EnemysModel.instance.initialize(MapModel.instance.roads[0]);			
+			EnemysModel.instance.initialize(MapModel.instance.roads[0]);	
+			BulletBaseViewPool.instance.fillUp([]);
 		}
 		
 		public function handleGamePouse():void
