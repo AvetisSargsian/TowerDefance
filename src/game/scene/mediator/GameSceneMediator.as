@@ -11,7 +11,7 @@ package game.scene.mediator
 	
 	import mvc.mediator.AbstractMediator;
 	import mvc.mediator.SceneMediator;
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import navigation.controller.NavigationController;
 	
@@ -67,7 +67,7 @@ package game.scene.mediator
 			super.dispose();
 		}
 		
-		override protected function setNativeVIew():AbstractView
+		override protected function setNativeVIew():BaseView
 		{
 			return new GameScene();
 		}

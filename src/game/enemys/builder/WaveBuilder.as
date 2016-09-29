@@ -30,15 +30,16 @@ package game.enemys.builder
 			viewProduct = waveFactory.produceWaveViews(obj);
 		}
 		
+		public function buildLauncherComands(canvas:DisplayObjectContainer):void
+		{
+			if (viewProduct)
+				commandProduct = waveFactory.produceViewCommandWraper(canvas,viewProduct);
+		}
+		
 		public function buildLauncher():void
 		{
 			executer = waveFactory.produceWaveLauncher();
 			executer.loadCommands( Vector.<ICommand>(commandProduct.content as Array) );
-		}
-		
-		public function buildLauncherComands(canvas:DisplayObjectContainer):void
-		{
-			commandProduct = waveFactory.produceViewCommandWraper(canvas,viewProduct);
 		}
 		
 		public function getProduct():IStartProduct

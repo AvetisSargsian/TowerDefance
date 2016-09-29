@@ -57,7 +57,7 @@ package game.towers.models
 		{
 			if (_towerProjection && _towerProjection.canBeBuilded)
 			{
-				_allTowers.push(_towerProjection);
+				_allTowers[_allTowers.length] = _towerProjection;
 				_towerProjection.build();
 			}
 			else if(_towerProjection)

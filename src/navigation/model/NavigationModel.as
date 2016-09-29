@@ -1,17 +1,16 @@
 package navigation.model
 {
 	import mvc.mediator.AbstractMediator;
-	import mvc.view.AbstractView;
+	import mvc.model.AbstractModel;
+	import mvc.view.BaseView;
 	
-	import starling.events.EventDispatcher;
-	
-	public class NavigationModel extends EventDispatcher
+	public class NavigationModel extends AbstractModel
 	{
 		public static const NAVIGATION_EVENT:String = "navigationEvent";
 		
 		private var _curentMediator:AbstractMediator;
 		private var _nextMediator:AbstractMediator;
-		private var _canvas:AbstractView;
+		private var _canvas:BaseView;
 		private static var _instance:NavigationModel;
 		
 		public static function get instance( ):NavigationModel
@@ -28,7 +27,7 @@ package navigation.model
 			super();
 		}
 		
-		public function init(displayObject:AbstractView):void
+		public function init(displayObject:BaseView):void
 		{
 			if (_canvas == null)
 				_canvas = displayObject;

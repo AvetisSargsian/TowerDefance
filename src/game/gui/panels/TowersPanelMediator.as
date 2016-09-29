@@ -3,14 +3,14 @@ package game.gui.panels
 	import game.towers.controllers.TowerController;
 	
 	import mvc.mediator.AbstractMediator;
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.events.Touch;
 	import starling.events.TouchEvent;
 	
 	public class TowersPanelMediator extends AbstractMediator
 	{
-		public function TowersPanelMediator(thisView:AbstractView = null)
+		public function TowersPanelMediator(thisView:BaseView = null)
 		{
 			super(thisView);
 			nativeVIew.addEventListener(TouchEvent.TOUCH,onTouch);
@@ -22,7 +22,7 @@ package game.gui.panels
 			super.dispose();
 		}
 		
-		override protected function setNativeVIew():AbstractView
+		override protected function setNativeVIew():BaseView
 		{
 			return new TowersPanel();
 		}

@@ -10,10 +10,6 @@ package game.enemys.builder.factory
 
 	public class WaveFactory extends AbstractWvaeFactory
 	{	
-		public function WaveFactory()
-		{
-		}
-		
 		override protected function createExecutor():ICommandExecutor
 		{
 			return new IntervalCommandExecuter(1);

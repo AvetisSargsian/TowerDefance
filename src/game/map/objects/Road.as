@@ -11,7 +11,7 @@ package game.map.objects
 //		========================================================================
 		public function addPoint(wayPoint:WayPoint):void
 		{
-			wayPointsVec.push(wayPoint);
+			wayPointsVec[wayPointsVec.length] = wayPoint;
 		}
 //		========================================================================
 		public function removePoint(wayPoint:WayPoint):void

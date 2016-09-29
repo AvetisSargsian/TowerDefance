@@ -3,11 +3,11 @@ package game.gui
 	import game.gui.panels.ButtonsPanel;
 	import game.gui.panels.TowersPanel;
 	
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.Button;
 	
-	public class UserInterface extends AbstractView
+	public class UserInterface extends BaseView
 	{
 		public static const BUTTONS_PANEL:String = "buttonsPanel";
 		public static const TOWERS_PANEL:String = "towersPanel";
@@ -21,6 +21,8 @@ package game.gui
 		
 		private function onAdded():void
 		{
+			this.onAddedToStage = null;
+			
 			var btnPanel:ButtonsPanel = new ButtonsPanel();
 			btnPanel.name = BUTTONS_PANEL;
 			btnPanel.x = 10;

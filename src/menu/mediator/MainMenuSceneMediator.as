@@ -2,7 +2,7 @@ package menu.mediator
 {
 	import menu.MainMenuScene;
 	
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	import mvc.mediator.SceneMediator;
 	
 	import navigation.controller.NavigationController;
@@ -24,7 +24,7 @@ package menu.mediator
 			super.dispose();
 		}
 		
-		override protected function setNativeVIew():AbstractView
+		override protected function setNativeVIew():BaseView
 		{
 			return new MainMenuScene();
 		}

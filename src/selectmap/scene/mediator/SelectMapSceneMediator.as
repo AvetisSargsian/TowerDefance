@@ -2,7 +2,7 @@ package selectmap.scene.mediator
 {
 	import game.map.controllers.MapController;
 	
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	import mvc.mediator.SceneMediator;
 	
 	import navigation.controller.NavigationController;
@@ -27,7 +27,7 @@ package selectmap.scene.mediator
 			super.dispose();
 		}
 		
-		override protected function setNativeVIew():AbstractView
+		override protected function setNativeVIew():BaseView
 		{
 			return new SelectMapScene();
 		}

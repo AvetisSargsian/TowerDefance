@@ -11,33 +11,51 @@ package game.enemys.builder.factory.comands
 	{
 		private var comands:Vector.<ICommand>;
 		private var delayCall:DelayedCall;
-		private var interval:Number = 1;
+		private var _interval:Number = 1;
 		
 		public function IntervalCommandExecuter(interval:Number)
 		{
-			this.interval = interval;
+			this._interval = interval;
+			this.comands = new Vector.<ICommand>();
 		}
 		
-		public function executeCommand():void
+		public function get interval():Number
 		{
+			return _interval;
+		}
+
+		public function set interval(value:Number):void
+		{
+			_interval = value;
+			if(GameModel.instance.jugler.contains(delayCall))
+			{
+				GameModel.instance.jugler.remove(delayCall);
+				executingCommand(_interval);	
+			}
+		}
+
+		public function startExecuting():void
+		{
+			if(GameModel.instance.jugler.contains(delayCall))
+				return;
 			if (comands && comands.length > 0) 
-				run(interval);
+				executingCommand(_interval);
 		}
 		
 		public function loadCommands(vec:Vector.<ICommand>):void
 		{
-			comands = vec;
+			comands.concat(vec);
 		}
 		
-		private function run(frequency:Number):void
+		private function executingCommand(frequency:Number):void
 		{
-			delayCall = new DelayedCall(releaseUnit,frequency);
+			delayCall = new DelayedCall(executeOne,frequency);
 			delayCall.repeatCount = comands.length;
 			GameModel.instance.jugler.add(delayCall);
-			releaseUnit();
+			executeOne();
 		}
 		
-		private function releaseUnit():void
+		private function executeOne():void
 		{
 			if (comands.length > 0)
 			{

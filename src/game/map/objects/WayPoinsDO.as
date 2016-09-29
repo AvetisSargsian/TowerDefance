@@ -21,7 +21,7 @@ package game.map.objects
 			{
 				for each (var obj:Object in value) 
 				{
-					_wayPoints.push(new WayPoint(obj.x,obj.y,obj.direction));
+					_wayPoints[_wayPoints.length] = new WayPoint(obj.x,obj.y,obj.direction);
 				}
 				_wayPoints.fixed = true;
 			}

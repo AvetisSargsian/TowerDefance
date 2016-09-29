@@ -190,9 +190,7 @@ package game.enemys.models
 		
 		private function random(range:Number):Number
 		{
-			var random:Number = Math.random();
-			var randomInRange:Number = random * range;
-			
+			var randomInRange:Number = Math.random() * range;	
 			return  Math.random() > 0.5 ? randomInRange : -randomInRange; 
 		}
 	}

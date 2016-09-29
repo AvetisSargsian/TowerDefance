@@ -39,7 +39,7 @@ package game.map.objects
 			{
 				for (var i:int = 0, len:int = _enemyTypes[type]; i < len; ++i) 
 				{
-					_enemys.push(new UnitModel(_road));	
+					_enemys[_enemys.length] = new UnitModel(_road);	
 				}	
 			}			
 		}
@@ -51,7 +51,7 @@ package game.map.objects
 			for (var str:String in eTypes) 
 			{
 				dict[str] = eTypes[str];
-				_vectorTypes.push(str);
+				_vectorTypes[_vectorTypes.length] = str;
 			}
 			_vectorTypes.fixed = true;
 			return dict;

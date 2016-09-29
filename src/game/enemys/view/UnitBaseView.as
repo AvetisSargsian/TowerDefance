@@ -2,11 +2,11 @@ package game.enemys.view
 {
 	import game.enemys.models.UnitModel;
 	
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.Image;
 	
-	public class UnitBaseView extends AbstractView
+	public class UnitBaseView extends BaseView
 	{
 		protected var unitModel:UnitModel
 		

@@ -1,11 +1,11 @@
 package game.towers.views
 {
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.Image;
 	import starling.utils.Color;
 	
-	public class TowerBaseView extends AbstractView
+	public class TowerBaseView extends BaseView
 	{	
 		public static const RANGE_CIRCUL:String = "rangeCircul";
 		public function TowerBaseView()

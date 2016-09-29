@@ -9,6 +9,8 @@ package game.enemys.builder.factory
 	{
 		public function AbstractWvaeFactory()
 		{
+			if(Object(this).constructor == AbstractWvaeFactory)
+				throw new Error("Abstract classes can not be instantiated");
 		}
 		
 		public final function produceWaveLauncher():ICommandExecutor
