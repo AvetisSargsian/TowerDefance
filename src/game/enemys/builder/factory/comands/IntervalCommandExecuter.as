@@ -16,7 +16,7 @@ package game.enemys.builder.factory.comands
 		public function IntervalCommandExecuter(interval:Number)
 		{
 			this._interval = interval;
-			this.comands = new Vector.<ICommand>();
+			comands = new Vector.<ICommand>();
 		}
 		
 		public function get interval():Number
@@ -44,7 +44,7 @@ package game.enemys.builder.factory.comands
 		
 		public function loadCommands(vec:Vector.<ICommand>):void
 		{
-			comands.concat(vec);
+			comands = comands.concat(vec);
 		}
 		
 		private function executingCommand(frequency:Number):void

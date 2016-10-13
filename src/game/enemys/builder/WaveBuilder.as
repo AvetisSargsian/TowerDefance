@@ -2,6 +2,8 @@ package game.enemys.builder
 {
 	import game.enemys.builder.factory.AbstractWvaeFactory;
 	import game.enemys.builder.factory.WaveFactory;
+	import game.enemys.builder.factory.comands.IntervalCommandExecuter;
+	import game.enemys.builder.products.WaveStarterProduct;
 	
 	import mvc.builder.IBuilder;
 	import mvc.command.interfaces.ICommand;
@@ -11,7 +13,6 @@ package game.enemys.builder
 	import mvc.factory.IStartProduct;
 	
 	import starling.display.DisplayObjectContainer;
-	import game.enemys.builder.products.WaveStarterProduct;
 
 	public final class WaveBuilder implements IBuilder, IDisposeble
 	{
