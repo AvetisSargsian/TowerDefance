@@ -1,5 +1,7 @@
 package
 {
+	import com.milkmangames.nativeextensions.AdMob;
+	
 	import flash.desktop.NativeApplication;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
@@ -22,6 +24,8 @@ package
 		{
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
+			stage.stageWidth = 720;
+			stage.stageHeight = 480;
 			stage.frameRate = 60;
 			
 			var iOS:Boolean = Capabilities.manufacturer.indexOf("iOS") != -1;
@@ -36,6 +40,10 @@ package
 			
 			NativeApplication.nativeApplication.addEventListener(
 				flash.events.Event.DEACTIVATE, function (e:*):void { myStarling.stop() });
+			
+//			var adMob:AdMobPromo = new AdMobPromo();
+			
+			var bool:Boolean = AdMob.isSupported
 			
 //			NativeApplication.nativeApplication.addEventListener(flash.events.Event.EXITING, function (e:*):void{});
 		}

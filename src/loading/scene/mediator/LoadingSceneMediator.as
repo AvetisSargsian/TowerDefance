@@ -3,7 +3,7 @@ package loading.scene.mediator
 	import loading.model.AssetsModel;
 	import loading.scene.LoadingScene;
 	
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	import mvc.mediator.SceneMediator;
 	
 	import starling.display.DisplayObject;
@@ -42,7 +42,7 @@ package loading.scene.mediator
 			super.dispose();
 		}
 		
-		override protected function setNativeVIew():AbstractView
+		override protected function setNativeVIew():BaseView
 		{
 			return new LoadingScene();
 		}

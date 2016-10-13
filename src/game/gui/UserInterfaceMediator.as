@@ -5,7 +5,7 @@ package game.gui
 	import game.gui.panels.TowersPanelMediator;
 	
 	import mvc.mediator.AbstractMediator;
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.Button;
 	import starling.events.Event;
@@ -15,7 +15,7 @@ package game.gui
 		private var buttonsPanelMediator:AbstractMediator;
 		private var towerPanelMediator:AbstractMediator;
 		
-		public function UserInterfaceMediator(thisView:AbstractView=null)
+		public function UserInterfaceMediator(thisView:BaseView=null)
 		{
 			super(thisView);
 			
@@ -26,10 +26,10 @@ package game.gui
 		{
 			nativeVIew.addEventListener(Event.ADDED_TO_STAGE,onAddedToStage);
 			
-			var btnPan:AbstractView = nativeVIew.getChildByName(UserInterface.BUTTONS_PANEL) as AbstractView; 
+			var btnPan:BaseView = nativeVIew.getChildByName(UserInterface.BUTTONS_PANEL) as BaseView; 
 			buttonsPanelMediator = new ButtonsPanelMediator(btnPan);
 			
-			var towerP:AbstractView = nativeVIew.getChildByName(UserInterface.TOWERS_PANEL) as AbstractView;
+			var towerP:BaseView = nativeVIew.getChildByName(UserInterface.TOWERS_PANEL) as BaseView;
 			towerPanelMediator = new TowersPanelMediator(towerP);
 			
 			///temp code, refactor after in separate panel and Mediator
@@ -48,7 +48,7 @@ package game.gui
 			super.dispose();
 		}
 		
-		override protected function setNativeVIew():AbstractView
+		override protected function setNativeVIew():BaseView
 		{
 			return new UserInterface();
 		}

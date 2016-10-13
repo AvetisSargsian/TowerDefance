@@ -37,7 +37,7 @@ package game.enemys.builder.factory.products
 			{
 				var unit:UnitBaseView = UnitBaseViewPool.instance.take() as UnitBaseView;
 				unit.assignModel(enemysModels[i]);
-				_content.push(unit);
+				_content[_content.length] = unit;
 			}
 		}
 	}

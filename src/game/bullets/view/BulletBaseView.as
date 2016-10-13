@@ -2,12 +2,12 @@ package game.bullets.view
 {
 	import game.bullets.models.BulletModel;
 	
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.Shape;
 	import starling.utils.Color;
 	
-	public class BulletBaseView extends AbstractView
+	public class BulletBaseView extends BaseView
 	{
 		private var model:BulletModel;
 		

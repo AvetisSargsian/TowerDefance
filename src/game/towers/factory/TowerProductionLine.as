@@ -6,7 +6,7 @@ package game.towers.factory
 	
 	import mvc.factory.IStartProduct;
 	import mvc.mediator.IMediator;
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.DisplayObjectContainer;
 	
@@ -25,7 +25,7 @@ package game.towers.factory
 		
 		public function start():void
 		{ 
-			towerBaseViewMediator.addToParent(canvas as AbstractView);
+			towerBaseViewMediator.addToParent(canvas as BaseView);
 			dispose();
 		}
 		

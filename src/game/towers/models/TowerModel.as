@@ -88,7 +88,7 @@ package game.towers.models
 		public function addTarget(enemy:UnitModel):void
 		{
 			if (enemy && isInRange(enemy))
-				_enemysInRange.push(enemy);
+				_enemysInRange[_enemysInRange.length] = enemy;
 		}
 		
 		public function isInRange(enemy:UnitModel):Boolean

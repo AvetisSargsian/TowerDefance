@@ -13,7 +13,7 @@ package game.enemys.builder.products
 		
 		public function start():void
 		{
-			launcher.executeCommand();
+			launcher.startExecuting();
 			launcher = null;
 		}
 	}

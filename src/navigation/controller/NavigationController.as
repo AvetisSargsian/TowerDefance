@@ -11,16 +11,18 @@ package navigation.controller
 	
 	import menu.mediator.MainMenuSceneMediator;
 	
+	import mvc.controller.AbstractController;
 	import mvc.mediator.SceneMediator;
 	
 	import navigation.model.NavigationModel;
 	
 	import starling.events.Event;
-	import starling.events.EventDispatcher;
 	
-	public class NavigationController extends EventDispatcher
+	public class NavigationController extends AbstractController
 	{
 		private static var _instance:NavigationController;
+		private var navModel:NavigationModel;
+		private var assetsModel:AssetsModel;
 		
 		public static function get instance( ):NavigationController
 		{
@@ -34,32 +36,26 @@ package navigation.controller
 		public function NavigationController(pvt:PrivateClass)
 		{
 			super();
+			navModel = NavigationModel.instance;
+			assetsModel = AssetsModel.instance;
+			assetsModel.addEventListener(AssetsModel.LOADING_COMPLETE,onLoadingComplete);
+			assetsModel.addEventListener(AssetsModel.LOADING_PRECOMPLETE, onLoadingPREComplete);
 		}
 		
 		public function changeScene(sceneDef:String):void
-		{
-			var navModel:NavigationModel = NavigationModel.instance,
-				assetsModel:AssetsModel = AssetsModel.instance;
-				
-				assetsModel.addEventListener(AssetsModel.LOADING_COMPLETE,onLoadingComplete);
-				assetsModel.addEventListener(AssetsModel.LOADING_PRECOMPLETE, onLoadingPREComplete);
-				
+		{	
 			switch(sceneDef)
 			{
 				case Constants.MAIN_MENU_SCENE:
 				{
-					navModel.curentScene  = new LoadingSceneMediator();
 					navModel.nextScene = new MainMenuSceneMediator();
-					assetsModel.enqueueAsset("GUI","mapIcons");
-					assetsModel.loadAssets();
+					loadAssets("GUI","mapIcons");
 					break;
 				}
 				case Constants.GAME_SCENE:
 				{
-					assetsModel.enqueueAsset(MapModel.instance.mapLoadingName);
-					assetsModel.loadAssets();
-					navModel.curentScene  = new LoadingSceneMediator();
 					navModel.nextScene = new GameSceneMediator();
+					loadAssets(MapModel.instance.mapLoadingName);
 					break;
 				}
 				case Constants.SELECT_MAP_SCENE:
@@ -74,26 +70,34 @@ package navigation.controller
 			}
 		}
 		
-		private function onLoadingPREComplete(event:Event = null):void
+		private function loadAssets(...loads):void
 		{
-			if (event)
-				event.target.removeEventListener(AssetsModel.LOADING_PRECOMPLETE,onLoadingPREComplete);
-			
+			navModel.curentScene  = new LoadingSceneMediator();
+			assetsModel.enqueueAsset(loads);
+			assetsModel.loadAssets();
+		}
+		
+		private function onLoadingPREComplete(event:Event = null):void
+		{	
 			if(NavigationModel.instance.nextScene is GameSceneMediator)
-			{
 				GameController.instance.initGameModels(AssetsModel.instance.getJSONObject("LevelData"));
-			}	
 		}
 		
 		//TODO:Add change scene animation class
 		private function onLoadingComplete(event:Event = null):void
 		{
-			if (event)
-				event.target.removeEventListener(AssetsModel.LOADING_COMPLETE,onLoadingComplete);
-			
 			var navModel:NavigationModel = NavigationModel.instance;
 			navModel.curentScene  = navModel.nextScene;
 			navModel.nextScene = null;
+		}
+		
+		override public function dispose():void
+		{
+			assetsModel.removeEventListener(AssetsModel.LOADING_COMPLETE,onLoadingComplete);
+			assetsModel.removeEventListener(AssetsModel.LOADING_PRECOMPLETE, onLoadingPREComplete);
+			assetsModel = null;
+			navModel = null;
+			super.dispose();
 		}
 	}
 }

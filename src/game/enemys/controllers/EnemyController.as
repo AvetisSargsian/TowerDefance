@@ -76,7 +76,6 @@ package game.enemys.controllers
 						GameModel.instance.takeDamage(unit.damage);	
 						unit.dispose();
 						enemysM.removEnemyByIndex(i);
-						
 					}else
 					{
 						unit.move();

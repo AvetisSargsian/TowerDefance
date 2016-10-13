@@ -2,10 +2,10 @@ package game.enemys.pool
 {
 	import game.enemys.view.UnitBaseView;
 	
-	import mvc.view.AbstractView;
-	import mvc.pool.AbstractViewAbstractPool;
+	import mvc.view.BaseView;
+	import mvc.pool.AbstractViewsAbstractPool;
 
-	public class UnitBaseViewPool extends AbstractViewAbstractPool
+	public class UnitBaseViewPool extends AbstractViewsAbstractPool
 	{
 		private static var _instance:UnitBaseViewPool;
 		public static function get instance():UnitBaseViewPool
@@ -20,7 +20,7 @@ package game.enemys.pool
 			super();
 		}
 		
-		override protected function createView():AbstractView
+		override protected function createView():BaseView
 		{
 			return new UnitBaseView();
 		}

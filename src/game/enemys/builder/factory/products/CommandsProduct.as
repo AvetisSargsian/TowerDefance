@@ -29,7 +29,7 @@ package game.enemys.builder.factory.products
 			_content = new Array();
 			for (var i:int = 0, len:int = array.length; i < len; ++i) 
 			{
-				_content.push(new AddChildCommand(canvas,array[i])); 
+				_content[_content.length] = new AddChildCommand(canvas,array[i]); 
 			}
 		}	
 	}

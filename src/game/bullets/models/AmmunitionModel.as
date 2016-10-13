@@ -28,7 +28,7 @@ package game.bullets.models
 			if (bullet)
 			{
 				dispatchEventWith(NEW_BULLET,false,bullet);
-				_bulletsStor.push(bullet);
+				_bulletsStor[_bulletsStor.length] = bullet;
 			}
 		}
 		

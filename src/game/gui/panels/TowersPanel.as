@@ -4,12 +4,12 @@
 	
 	import loading.model.AssetsModel;
 	
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.Image;
 	import starling.utils.Color;
 	
-	public class TowersPanel extends AbstractView
+	public class TowersPanel extends BaseView
 	{
 		private var _bg:Image;
 		

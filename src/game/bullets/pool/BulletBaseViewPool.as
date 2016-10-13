@@ -2,10 +2,10 @@ package game.bullets.pool
 {
 	import game.bullets.view.BulletBaseView;
 	
-	import mvc.view.AbstractView;
-	import mvc.pool.AbstractViewAbstractPool;
+	import mvc.view.BaseView;
+	import mvc.pool.AbstractViewsAbstractPool;
 
-	public class BulletBaseViewPool extends AbstractViewAbstractPool
+	public class BulletBaseViewPool extends AbstractViewsAbstractPool
 	{
 		private static var _instance:BulletBaseViewPool;
 		public static function get instance():BulletBaseViewPool
@@ -20,7 +20,7 @@ package game.bullets.pool
 			super();
 		}
 		
-		override protected function createView():AbstractView
+		override protected function createView():BaseView
 		{
 			return new BulletBaseView();
 		}

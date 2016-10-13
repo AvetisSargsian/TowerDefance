@@ -79,7 +79,6 @@ package game.enemys.models
 			{
 				_newWave = _waves.shift();
 				_enemysInProgress = _enemysInProgress.concat(_newWave.enemys);
-				
 				Starling.juggler.delayCall(newWaveMessage,delay);
 			}
 			else if (_enemysInProgress.length == 0)

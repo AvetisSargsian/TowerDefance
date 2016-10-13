@@ -20,7 +20,7 @@ package game.map.objects
 			{
 				for each (var obj:Object in value) 
 				{
-					_waves.push(new Wave(obj.total_count, obj.scheme, obj.enemys_types));
+					_waves[_waves.length] = new Wave(obj.total_count, obj.scheme, obj.enemys_types);
 				}
 				_waves.fixed = true;
 			}

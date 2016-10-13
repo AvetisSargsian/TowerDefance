@@ -2,12 +2,12 @@ package game.gui.panels
 {
 	import loading.model.AssetsModel;
 	
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.Button;
 	import starling.utils.Color;
 	
-	public class ButtonsPanel extends AbstractView
+	public class ButtonsPanel extends BaseView
 	{
 		public static const POUSE_BUTTON:String = "pouseBtn";
 		public static const NEW_WAVE_BUTTON:String = "newWaveBtn";

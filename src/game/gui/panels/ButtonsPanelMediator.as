@@ -5,7 +5,7 @@ package game.gui.panels
 	import game.models.GameModel;
 	
 	import mvc.mediator.AbstractMediator;
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.Button;
 	import starling.events.Event;
@@ -15,7 +15,7 @@ package game.gui.panels
 		private var unitsCont:EnemyController;
 		private var gameController:GameController;
 		
-		public function ButtonsPanelMediator(thisVeiw:AbstractView = null)
+		public function ButtonsPanelMediator(thisVeiw:BaseView = null)
 		{
 			super(thisVeiw);
 			
@@ -32,7 +32,7 @@ package game.gui.panels
 			super.dispose();
 		}
 		
-		override protected function setNativeVIew():AbstractView
+		override protected function setNativeVIew():BaseView
 		{
 			return new ButtonsPanel();
 		}

@@ -5,7 +5,7 @@ package game.towers.views.mediator
 	import game.towers.views.TowerBaseView;
 	
 	import mvc.mediator.AbstractMediator;
-	import mvc.view.AbstractView;
+	import mvc.view.BaseView;
 	
 	import starling.display.Image;
 	import starling.events.Event;
@@ -49,7 +49,7 @@ package game.towers.views.mediator
 			super.dispose();
 		}
 		
-		override protected function setNativeVIew():AbstractView
+		override protected function setNativeVIew():BaseView
 		{
 			return new TowerBaseView();
 		}
