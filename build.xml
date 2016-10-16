@@ -4,7 +4,7 @@
 	
 	<taskdef resource="flexTasks.tasks" classpath="${FLEX_HOME}/ant/lib/flexTasks.jar"/> 
 	
-	<target name="main" depends="clean, copy, compile, launch"/>
+	<target name="main" depends="launch"/>
 	
 	<target name="clean">
 		<delete dir="${DEPLOY_DIR}" />
@@ -12,20 +12,18 @@
 	</target>
 	
 	<target name="copy" description="Copies dependencies">
-		<copy todir="${DEPLOY_DIR}">  <fileset dir="${ASSETS}"/> </copy>
+		<!-- <copy todir="${DEPLOY_DIR}">  <fileset dir="${ASSETS}"/> </copy> -->
 		<copy file="${SRC_DIR}/${DESCRIPTOR}" tofile="${DEPLOY_DIR}/${DESCRIPTOR}"/>
 		<replaceregexp file="${DEPLOY_DIR}/${DESCRIPTOR}"
 		               byline="true"
 		               match="((?&lt;=content&gt;)[\S\s]*?(?=\&lt;\/content))"
-		               replace="${APP_SWF_NAME}"/>
-		
-		<!-- <copy file="${project.root}/${air.keystore}" tofile="${deploy.dir}/${air.keystore}"/> -->
+		               replace="${APP_SWF_NAME}.swf"/>
 	</target>
 	
 	<target name="compile">
 		<mxmlc 
 			file="${SRC_DIR}/${APP_MAIN_CLASS}" 
-			output="${DEPLOY_DIR}/${APP_SWF_NAME}" 
+			output="${DEPLOY_DIR}/${APP_SWF_NAME}.swf" 
 			configname="air" 
 			failonerror="true" 
 			debug="${DEBUG}">
@@ -36,16 +34,37 @@
 			<library-path file="${FLEX_HOME}/frameworks/locale/en_US" append="true"/>
 			<library-path dir="${LIBS_DIR}" includes="*.swc" append="true"/>
 			<source-path path-element="${ASSETS}"/>
-			<compiler.external-library-path dir="${ANES_DIR}" append="true">
-			   <include name="*.swc" />
-			</compiler.external-library-path>
+			<external-library-path dir="${ANES_DIR}" includes="*.swc" append="true"/>
 			<define name="CONFIG::map_dev" value="true"/>
 			<define name="CONFIG::debug" value="${DEBUG}"/>
-			
 		</mxmlc>
 	</target>
 	
-	<target name="launch" description="Launches app in ADL">
+	<target name="pack-andr" depends="clean, copy, compile">
+		<condition property="adt.name" value="adt">
+			<os family="unix" />
+		</condition>
+		<condition property="adt.name" value="adt.bat">
+			<os family="windows" />
+		</condition>
+
+		<exec executable="${ADT_PATH}/${adt.name}" failonerror="true" >
+			<arg line="-package"/>
+			<arg line="-target apk"/>
+			<arg line="-storetype pkcs12" />
+			<arg line="-keystore ${basedir}/${CERT}" />
+			<arg line="-storepass fdbr12345" />
+			<arg line="${DEPLOY_DIR}/${APP_SWF_NAME}.apk" />
+			<arg line="${DEPLOY_DIR}/${DESCRIPTOR}" />
+			<arg line="-C ${DEPLOY_DIR} ${APP_SWF_NAME}.swf" />
+			<arg line="-C ${ASSETS} GUI" />
+			<arg line="-C ${ASSETS} mapIcons" />
+			<arg line="-C ${ASSETS} maps" />
+			<arg line="-extdir ${LIBS_DIR}" />
+		</exec>
+	</target>
+	
+	<target name="launch" description="Launches app in ADL" depends="clean, copy, compile">
 		<exec executable="${ADL}" failonerror="true" >
 			<arg line="-profile mobileDevice"/>
 			<arg line="-screensize NexusOne"/>
