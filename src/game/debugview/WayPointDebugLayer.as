@@ -7,6 +7,7 @@ package game.debugview
 	import game.map.objects.WayPoint;
 	
 	import starling.display.DisplayObject;
+	import starling.display.DisplayObjectContainer;
 	import starling.display.Shape;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -44,7 +45,7 @@ package game.debugview
 		
 		private function onTouch(event:TouchEvent):void
 		{ 
-			var touch:Touch = event.getTouch(event.target as DisplayObject,TouchPhase.HOVER);
+			var touch:Touch = event.getTouch((event.target as DisplayObject).parent,TouchPhase.HOVER);
 			if (touch)
 			{
 				pointC.setTo(touch.globalX,	touch.globalY);
@@ -87,9 +88,8 @@ package game.debugview
 		
 		private function onAddedToSTage(event:Event):void
 		{
-			removeEventListener(Event.ADDED_TO_STAGE,onAddedToSTage);
-
-//			this.parent.addEventListener(TouchEvent.TOUCH,onTouch);
+			removeEventListener(Event.ADDED_TO_STAGE,onAddedToSTage); 
+			this.parent.addEventListener(TouchEvent.TOUCH,onTouch);//
 			drawRoad();
 		}
 		
@@ -154,7 +154,7 @@ package game.debugview
 		}
 		
 		private function findeProectionPoint(pointA:Point, pointB:Point, pointC:Point):Point
-		{
+		{			
 			var abVec:Point = new Point(pointB.x - pointA.x, pointB.y - pointA.y),
 				acVec:Point = new Point(pointC.x - pointA.x, pointC.y - pointA.y),
 				squaredLengthAB:Number = abVec.x * abVec.x + abVec.y * abVec.y,
@@ -168,6 +168,56 @@ package game.debugview
 			var x:Number = pointA.x + scale_AC_AB * abVec.x,
 				y:Number = pointA.y + scale_AC_AB * abVec.y,
 				pointOnVector:Point = new Point(x,y);
+			
+//			var dx:Number = x - pointC.x;
+//			var dy:Number = y - pointC.y;
+//			var distance_pointOnVector_C:Number = Math.sqrt(dx*dx + dy*dy);
+			
+//			http://stackoverflow.com/questions/1073336/circle-line-segment-collision-detection-algorithm
+//			R - radius of circul;
+//			C - center of circul
+//			intersecPoint
+//			if (distance_pointOnVector_C == R)
+//			{
+				// line segment touches circle; one intersection point
+//				intersecPoint = pointOnVector
+//				if (scale_AC_AB < 0 || scale_AC_AB > 1)
+//				{
+					// intersection point is not actually within line segment
+//				}
+//			}
+//			else if (distance_pointOnVector_C < R)
+//			{
+				// two possible intersection points
+				
+//				var dt:Number = Math.sqrt(R * R - distance_pointOnVector_C * distance_pointOnVector_C) / Math.sqrt(squaredLengthAB);
+//				dX = pointB.x - pointA.x;
+//				dy = pointB.y - pointA.y;
+				
+				// intersection point nearest to A
+				
+//				t1 = scale_AC_AB - dt;
+//				i1X = pointA.x + t1 * dX;
+//				i1Y = pointA.y + t1 * dY;
+//				if (t1 < 0 || t1 > 1)
+//				{
+					// intersection point is not actually within line segment
+//				}
+				
+				// intersection point farthest from A
+
+//				t2 = scale_AC_AB + dt;
+//				i2X = pointA.x + t2 * dX;
+//				i2Y = pointA.y + t2 * dY;
+//				if (t2 < 0 || t2 > 1)
+//				{
+					// intersection point is not actually within line segment
+//				}
+//			}
+//			else
+//			{
+				// no intersection
+//			}
 			
 			return pointOnVector;  
 		}

@@ -1,6 +1,7 @@
 package game.scene.mediator
 {
 	import game.bullets.view.mediator.AmmunitionLayerMediator;
+	import game.debugview.WayPointDebugLayer;
 	import game.enemys.view.mediator.EnemyLayerMediator;
 	import game.gui.UserInterfaceMediator;
 	import game.map.controllers.MapController;
@@ -84,6 +85,11 @@ package game.scene.mediator
 		
 		private function onAdded():void
 		{
+			CONFIG::map_dev
+			{
+				var roadDebugLayer:WayPointDebugLayer = new WayPointDebugLayer();
+				nativeVIew.addChild(roadDebugLayer);
+			}
 			UIMediator.addToParent(nativeVIew);
 			towerLayerMediator.addToParent(nativeVIew);
 			enemyLayerMediator.addToParent(nativeVIew);

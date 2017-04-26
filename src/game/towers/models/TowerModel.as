@@ -112,7 +112,7 @@ package game.towers.models
 			}
 		}
 		
-		public function setNewPos(new_x:Number,new_y:Number,roadDist:Number = 0,neiborTowerDist:Number = 0):void
+		public function setNewPos(new_x:Number, new_y:Number, roadDist:Number = 0, neiborTowerDist:Number = 0):void
 		{
 			if (_isBuilded ) return;
 			_position.setTo(new_x,new_y);

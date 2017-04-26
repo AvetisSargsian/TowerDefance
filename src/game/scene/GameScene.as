@@ -1,6 +1,5 @@
 package game.scene
 {
-	import game.debugview.WayPointDebugLayer;
 	import game.map.models.MapModel;
 	
 	import mvc.view.Scene;
@@ -23,15 +22,9 @@ package game.scene
 		private function onAdded():void
 		{
 			var bg:Image = new Image(assetManager.getTexture(mapModel.mapName));
-			bg.touchable = false;
+			bg.touchable = CONFIG::map_dev;
 			addChild(bg);
 			mapModel = null;
-			
-			CONFIG::map_dev
-			{
-				var roadDebugLayer:WayPointDebugLayer = new WayPointDebugLayer();
-				addChild(roadDebugLayer);
-			}
 		}
 	}
 }
