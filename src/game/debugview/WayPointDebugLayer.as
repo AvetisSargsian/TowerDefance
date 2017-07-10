@@ -7,7 +7,6 @@ package game.debugview
 	import game.map.objects.WayPoint;
 	
 	import starling.display.DisplayObject;
-	import starling.display.DisplayObjectContainer;
 	import starling.display.Shape;
 	import starling.display.Sprite;
 	import starling.events.Event;

@@ -9,9 +9,7 @@ package game.bullets.factory
 	
 	public class BulletFactory extends AbstractMethodFactory
 	{
-		public function BulletFactory()
-		{
-		}
+		public function BulletFactory(){}
 		
 		override protected function createProduct(canvas:DisplayObjectContainer,obj:Object = null):IStartProduct
 		{

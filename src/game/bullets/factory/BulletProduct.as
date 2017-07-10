@@ -17,9 +17,6 @@ package game.bullets.factory
 			canvas.addChild(bullet);
 		}
 		
-		public function start():void
-		{
-			
-		}
+		public function start():void {}
 	}
 }
